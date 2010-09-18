@@ -1,0 +1,445 @@
+<{include file="member/member_header.html"}>
+<script language='javascript' src='js/check_form.js'></script>
+<div id="wrap_content">
+<div id="left_menu">
+<{include file="member/left_menu.html"}>
+</div>
+<div id="right_content">
+<{if $action == 'main'}>
+<div class="title_tip">个人资料：</div>
+<form action="?c=profile&action=save" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">姓名：</td>
+    <td align="left"><input name="realname" type="text" id="realname" value="<{$realname}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">性别：</td>
+    <td align="left">
+	  <label><input name="gender" type="radio" value="1" <{if $gender == 1}>checked="checked" <{/if}>/>帅哥</label>
+      <label><input type="radio" name="gender" value="2" <{if $gender == 2}>checked="checked" <{/if}>/>美女</label>
+	  <label><input type="radio" name="gender" value="3" <{if $gender == 3}>checked="checked" <{/if}>/>保密</label>
+	  </td>
+  </tr>
+  
+  <tr>
+    <td align="right">婚姻状况:</td>
+    <td align="left">
+		 <label for="1"><input name="merrage" type="radio" value="1" <{if $merrage == 1}>checked="checked" <{/if}> />已婚</label>
+		 <label for="2"><input type="radio" name="merrage" value="2" <{if $merrage == 2}>checked="checked" <{/if}>/>未婚</label>
+		 <label for="3"><input type="radio" name="merrage" value="3" <{if $merrage != 1 | $merrage != 2}>checked="checked" <{/if}>/>保密</label>
+ </td>
+  </tr>
+  <tr>
+    <td align="right">出生年月日:</td>
+    <td align="left">
+	<{html_select_date prefix="birth" start_year="-55" end_year="-5" field_order="YMD" time=$birthday}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">年龄:</td>
+    <td align="left"><input name="age" type="text" id="age" value="<{$age}>" disabled="disabled"/></td>
+  </tr>
+  <tr>
+    <td align="right">家庭电话:</td>
+    <td align="left"><input name="homephone" type="text" id="homephone" value="<{$homephone}>"/>
+      <label>
+      <input name="homephone_status" type="checkbox" id="homephone_status" value="1" <{if $homephone_status==1}>checked="checked"<{/if}> />
+      公开</label></td>
+  </tr>
+  <tr>
+    <td align="right">办公电话:</td>
+    <td align="left"><input name="officephone" type="text" id="officephone" value="<{$officephone}>"/>
+      <input name="officephone_status" type="checkbox" id="officephone_status" value="1" <{if $officephone_status==1}>checked="checked"<{/if}> />
+公开</td>
+  </tr>
+  <tr>
+    <td align="right">手机:</td>
+    <td align="left"><input name="mobile" type="text" id="mobile" value="<{$mobile}>"/>
+      <input name="mobile_status" type="checkbox" id="mobile_status" value="1" <{if $mobile_status==1}>checked="checked"<{/if}>/>
+公开</td>
+  </tr>
+  <tr>
+    <td align="right">Email:</td>
+    <td align="left"><input name="email" type="text" id="email" value="<{$email}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">QQ:</td>
+    <td align="left"><input name="qq" type="text" id="qq" value="<{$qq}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">MSN:</td>
+    <td align="left"><input name="msn" type="text" id="msn" value="<{$msn}>"/></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{elseif $action == 'social'}>
+<div class="title_tip">社会信息：</div>
+<form action="?c=profile&action=savesocial" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">工作单位：</td>
+    <td align="left"><input name="job_company" type="text" id="job_company" value="<{$job_company}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">通讯地址：</td>
+    <td align="left">
+	  <label>
+	  <input name="job_address" type="text" id="job_address" value="<{$job_address}>"/>
+	  </label></td>
+  </tr>
+  
+  <tr>
+    <td align="right">工作部门:</td>
+    <td align="left">
+		 <label for="1">
+		 <input name="job_bumen" type="text" id="job_bumen" value="<{$job_bumen}>"/>
+		 </label></td>
+  </tr>
+  <tr>
+    <td align="right">工作职务:</td>
+    <td align="left"><input name="job_zhiwu" type="text" id="job_zhiwu" value="<{$job_zhiwu}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">工作内容/职权:</td>
+    <td align="left"><input name="job_zhiquan" type="text" id="job_zhiquan" value="<{$job_zhiquan}>" /></td>
+  </tr>
+  <tr>
+    <td align="right">祖籍:</td>
+    <td align="left"><input name="job_zhuji" type="text" id="job_zhuji" value="<{$job_zhuji}>"/>
+      <label></label></td>
+  </tr>
+  <tr>
+    <td align="right">家庭住址:</td>
+    <td align="left"><input name="job_homeaddress" type="text" id="officephone" value="<{$job_homeaddress}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">是否公开信息:</td>
+    <td align="left">
+	<{if $show_social == 1}>
+	<input name="show_social" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="show_social" value="0" />否
+	<{else}>
+	<input name="show_social" type="radio" value="1" />
+    是   <input type="radio" name="show_social" value="0" checked="checked" />否
+	<{/if}>
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+
+<{elseif $action == 'zhuanye'}>
+<div class="title_tip">专业信息：</div>
+<form action="?c=profile&action=savezhuanye" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">最高学历：</td>
+    <td align="left"><input name="xueli" type="text" id="xueli" value="<{$xueli}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">本科入学年份：</td>
+    <td align="left">
+	  <label>
+	  <{html_select_date prefix="benke_bengin"  start_year="-55" end_year="+1" field_order="Y" time=$benke_bengin}>年
+	  </label></td>
+  </tr>
+  
+  <tr>
+    <td align="right">本科毕业年份:</td>
+    <td align="left">
+		 <label for="1">
+		 <{html_select_date prefix="benke_end" start_year="-55" end_year="+1" field_order="Y" time=$benke_end}>年
+		 </label></td>
+  </tr>
+  <tr>
+    <td align="right">本科学院:</td>
+    <td align="left"><input name="benke_xuyuan" type="text" id="benke_xuyuan" value="<{$benke_xuyuan}>"/></td>
+  </tr>
+   <tr>
+    <td align="right">本科专业:</td>
+    <td align="left"><input name="benke_zhuanye" type="text" id="benke_zhuanye" value="<{$benke_zhuanye}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">研究生入学年份:</td>
+    <td align="left"><{html_select_date prefix="yanjiu_bengin"  start_year="-55" end_year="+1" field_order="Y" time=$yanjiu_bengin}>年</td>
+  </tr>
+  <tr>
+    <td align="right">研究生毕业年份:</td>
+    <td align="left"><{html_select_date prefix="yanjiu_end" start_year="-55" end_year="+1" field_order="Y" time=$yanjiu_end}>年</td>
+  </tr>
+  <tr>
+    <td align="right">研究生学院:</td>
+    <td align="left"><input name="yanjiu_xuyuan" type="text" id="yanjiu_xuyuan" value="<{$yanjiu_xuyuan}>"/></td>
+  </tr>
+   <tr>
+    <td align="right">研究生专业:</td>
+    <td align="left"><input name="yanjiu_zhuanye" type="text" id="yanjiu_zhuanye" value="<{$yanjiu_zhuanye}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">研究生导师:</td>
+    <td align="left"><input name="yanjiu_daoshi" type="text" id="yanjiu_daoshi" value="<{$yanjiu_daoshi}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">博士生入学年份:</td>
+    <td align="left"><{html_select_date prefix="boshi_begin" start_year="-55" end_year="+1" field_order="Y" time=$boshi_begin}>年</td>
+  </tr>
+  <tr>
+    <td align="right">博士毕业年份:</td>
+    <td align="left"><{html_select_date prefix="boshi_end"  start_year="-55" end_year="+1" field_order="Y" time=$boshi_end}>年</td>
+  </tr>
+  <tr>
+    <td align="right">博士生学院:</td>
+    <td align="left"><input name="boshi_xuyuan" type="text" id="boshi_xuyuan" value="<{$boshi_xuyuan}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">博士生专业:</td>
+    <td align="left"><input name="boshi_zhuanye" type="text" id="boshi_zhuanye" value="<{$boshi_zhuanye}>"/></td>
+  </tr><tr>
+    <td align="right">博士生导师:</td>
+    <td align="left"><input name="boshi_daoshi" type="text" id="boshi_daoshi" value="<{$boshi_daoshi}>"/></td>
+  </tr> 
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{elseif $action == 'chuangye'}>
+<div class="title_tip">创业信息：</div>
+<form action="?c=profile&action=savechuangye" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="230" height="19" align="right">希望创业的领域:</td>
+    <td align="left"><input name="chuangye_lingyu" type="text" id="chuangye_lingyu" value="<{$chuangye_lingyu}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的经验：</td>
+    <td align="left">
+	 <{if $chuangye_jingyan == 1}>
+	<input name="chuangye_jingyan" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="chuangye_jingyan" value="0" />否
+	<{else}>
+	<input name="chuangye_jingyan" type="radio" value="1" />
+    是   <input type="radio" name="chuangye_jingyan" value="0" checked="checked" />否
+	<{/if}>
+	 </td>
+  </tr>
+  
+  <tr>
+    <td align="right">是否有创业行业的市场经验:</td>
+    <td align="left">
+	<{if $chuangye_shichang == 1}>
+	<input name="chuangye_shichang" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="chuangye_shichang" value="0" />否
+	<{else}>
+	<input name="chuangye_shichang" type="radio" value="1" />
+    是   <input type="radio" name="chuangye_shichang" value="0" checked="checked" />否
+	<{/if}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的销售经验:</td>
+    <td align="left">
+	<{if $chuangye_xiaoshou == 1}>
+	<input name="chuangye_xiaoshou" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="chuangye_xiaoshou" value="0" />否
+	<{else}>
+	<input name="chuangye_xiaoshou" type="radio" value="1" />
+    是   <input type="radio" name="chuangye_xiaoshou" value="0" checked="checked" />否
+	<{/if}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的技术研发经验:</td>
+    <td align="left">
+	<{if $chuangye_jishu == 1}>
+	<input name="chuangye_jishu" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="chuangye_jishu" value="0" />否
+	<{else}>
+	<input name="chuangye_jishu" type="radio" value="1" />
+    是   <input type="radio" name="chuangye_jishu" value="0" checked="checked" />否
+	<{/if}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的客户:</td>
+    <td align="left">
+	<{if $chuangye_kehu == 1}>
+	<input name="chuangye_kehu" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="chuangye_kehu" value="0" />否
+	<{else}>
+	<input name="chuangye_kehu" type="radio" value="1" />
+    是   <input type="radio" name="chuangye_kehu" value="0" checked="checked" />否
+	<{/if}>
+      </td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的经营团队:</td>
+    <td align="left">
+	<{if $chuangye_tuandui == 1}>
+	<input name="chuangye_tuandui" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="chuangye_tuandui" value="0" />否
+	<{else}>
+	<input name="chuangye_tuandui" type="radio" value="1" />
+    是   <input type="radio" name="chuangye_tuandui" value="0" checked="checked" />否
+	<{/if}></td>
+  </tr>
+  <tr>
+    <td align="right">觉得自己在未来创业团队中角色最适合:</td>
+    <td align="left">
+	<{html_radios options=$juese_arr name="chuangye_juese"  checked=$chuangye_juese}>
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{elseif $action == 'jianzhi'}>
+<div class="title_tip">社会信息：</div>
+<form action="?c=profile&action=savesocial" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">工作单位：</td>
+    <td align="left"><input name="job_company" type="text" id="job_company" value="<{$job_company}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">通讯地址：</td>
+    <td align="left">
+	  <label>
+	  <input name="job_address" type="text" id="job_address" value="<{$job_address}>"/>
+	  </label></td>
+  </tr>
+  
+  <tr>
+    <td align="right">工作部门:</td>
+    <td align="left">
+		 <label for="1">
+		 <input name="job_bumen" type="text" id="job_bumen" value="<{$job_bumen}>"/>
+		 </label></td>
+  </tr>
+  <tr>
+    <td align="right">工作职务:</td>
+    <td align="left"><input name="job_zhiwu" type="text" id="job_zhiwu" value="<{$job_zhiwu}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">工作内容/职权:</td>
+    <td align="left"><input name="job_zhiquan" type="text" id="job_zhiquan" value="<{$job_zhiquan}>" /></td>
+  </tr>
+  <tr>
+    <td align="right">祖籍:</td>
+    <td align="left"><input name="job_zhuji" type="text" id="job_zhuji" value="<{$job_zhuji}>"/>
+      <label></label></td>
+  </tr>
+  <tr>
+    <td align="right">家庭住址:</td>
+    <td align="left"><input name="job_homeaddress" type="text" id="officephone" value="<{$job_homeaddress}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">是否公开信息:</td>
+    <td align="left">
+	<{if $show_social == 1}>
+	<input name="show_social" type="radio" value="1" checked="checked" />
+    是   <input type="radio" name="show_social" value="0" />否
+	<{else}>
+	<input name="show_social" type="radio" value="1" />
+    是   <input type="radio" name="show_social" value="0" checked="checked" />否
+	<{/if}>
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{elseif $action == 'marrage'}>
+<div class="title_tip">婚姻信息：</div>
+<form action="?c=profile&action=savemarrage" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">身高：</td>
+    <td align="left"><input name="shengao" type="text" id="shengao" value="<{$shengao}>"/>cm</td>
+  </tr>
+  <tr>
+    <td align="right">体重：</td>
+    <td align="left">
+	  <label>
+	  <input name="tizhong" type="text" id="tizhong" value="<{$tizhong}>"/>kg
+	  </label></td>
+  </tr>
+  
+  <tr>
+    <td align="right">相貌自评:</td>
+    <td align="left">
+		<{html_radios name="xiangmao" options=$xiangmao_arr checked=$xiangmao}></td>
+  </tr>
+  </table>
+  <div class="title_tip">对对方的要求：</div>
+ <table width="98%" border="1" class="bt_style">
+  <tr>
+    <td align="right">身高:</td>
+    <td align="left"><input name="o_shengao" type="text" id="o_shengao" value="<{$o_shengao}>"/>cm</td>
+  </tr>
+  <tr>
+    <td align="right">体重:</td>
+    <td align="left"><input name="o_tizhong" type="text" id="o_tizhong" value="<{$o_tizhong}>" />kg</td>
+  </tr>
+  <tr>
+    <td align="right">相貌自评:</td>
+    <td align="left"><{html_checkboxes name="o_xiangmao" options=$xiangmao_arr selected=$o_xiangmao}>
+      </td>
+  </tr>
+  <tr>
+    <td align="right">学历:</td>
+    <td align="left"><{html_radios name="o_xueli" options=$xueli_arr checked=$o_xueli}></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{elseif $action == 'fenhui'}>
+<div class="title_tip">分会信息：</div>
+<form action="?c=profile&action=savefenhui" method="post">
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">参加分会的名称：</td>
+    <td align="left"><input name="fenhui" type="text" id="fenhui" value="<{$fenhui}>"/></td>
+  </tr>
+  <tr>
+    <td align="right">分会的职务：</td>
+    <td align="left">
+	<{html_radios name="fenhui_zhiwu" options=$zhiwu_arr checked=$fenhui_zhiwu}></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" height="30"><label>
+      <input type="submit" name="Submit" value="保存信息" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{/if}>
+</div>
+<div class="clear"></div>
+</div>
+<{include file="footer.html"}>

@@ -1,0 +1,25 @@
+﻿<{include file="header.htm"}>
+    <div class="container">
+	<div class="msg_info"> <a href="?m=focuspic&a=addindex">添加焦点图</a> |info-><{ $msg_info }></div>
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+  <tr>
+		  <th width="102">缩略图</th>
+          <th width="112">编号</th>
+          <th width="232">图片标题</th>
+          <th width="222" align="center">链接地址</th>
+          <th width="159">排序</th>
+          <th width="506">操作项</th>
+      </tr>
+        <{ foreach from=$focus item=pls }>
+	    <tr>
+		  <td ><img src="./<{$pls.picaddress }>" width=100 height=80></td>
+          <td align="center"> <{$pls.focusid}> </td>
+          <td align="center"> <{$pls.title}></td>
+          <td align="center">  <{$pls.picurl}></td>
+          <td align="center"> <{$pls.orderby}> </td>
+          <td align="center"><a href="?m=focuspic&a=piceditindex&id=<{$pls.focusid}>">编辑</a> | <a href="?m=focuspic&a=picdel&id=<{$pls.focusid}>"  onclick="if(confirm('你确定要删除该焦点图吗，删除后无法恢复') == true){return true;} else {return false;}">删除</a></td>
+        </tr>
+		<{ /foreach }>
+    </table>
+  </div>
+<{include file="footer.htm"}>

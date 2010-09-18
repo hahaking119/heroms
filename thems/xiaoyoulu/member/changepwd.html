@@ -1,0 +1,37 @@
+<{include file="member/member_header.html"}>
+<div id="wrap_content">
+<div id="left_menu">
+<{include file="member/left_menu.html"}>
+</div>
+<div id="right_content">
+<{if $success}>
+	<div class="msgtip"><{$sucmsg}></div>
+<{else}>
+<{if $error}><div class="msgtip"><{$errmsg}></div><{/if}>
+<form action="?c=changepwd&action=save" method="post">
+<div class="title_tip">修改密码：</div>
+	<table width="600" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">原始密码：</td>
+    <td width="460" align="left"><input name="oldpwd" type="text" id="oldpwd" /></td>
+  </tr>
+  <tr>
+    <td align="right">新密码:</td>
+    <td align="left"><input name="newpwd" type="password" id="newpwd" /></td>
+  </tr>
+  <tr>
+    <td align="right">重复新密码:</td>
+    <td align="left"><input name="renewpwd type=" type="password"" id="renewpwd"text/></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><label>
+      <input type="submit" name="Submit" value="修改密码" />
+    </label></td>
+    </tr>
+</table>
+</form>
+<{/if}>
+</div>
+<div class="clear"></div>
+</div>
+<{include file="footer.html"}>

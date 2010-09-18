@@ -1,0 +1,161 @@
+﻿<{include file="header.htm"}>
+<script type="text/javascript" charset="utf-8" language="javascript" src="libs/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+       KE.show({
+           id : 'content_1',
+		   cssPath : './libs/kindeditor/index.css'
+       });
+	    KE.show({
+           id : 'content_2',
+		   cssPath : './libs/kindeditor/index.css'
+       });
+   </script>
+<script src="js/ajaxupload.3.2.js" type="text/javascript"></script>
+<script type= "text/javascript">/*<![CDATA[*/
+$(document).ready(function(){
+
+	/* example 1 */
+	var button = $('#button1'), interval;
+	new Ajax_upload(button,{
+		//action: 'upload-test.php', // I disabled uploads in this example for security reasons
+		action: 'upload.php', 
+		name: 'picfile',
+		onSubmit : function(file, ext){
+			// change button text, when user selects file			
+			button.text('Uploading');
+			// If you want to allow uploading only 1 file at time,
+			// you can disable upload button
+			this.disable();
+			if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+				/* Setting data */
+				this.setData({
+					'key': 'This string will be send with the file'
+				});
+			} else {
+				// extension is not allowed
+				alert("不是图片格式，不允许上传");
+				// cancel upload
+				this.enable();
+				return false;				
+			}
+			
+			// Uploding -> Uploading. -> Uploading...
+			interval = window.setInterval(function(){
+				var text = button.text();
+				if (text.length < 13){
+					button.text(text + '.');					
+				} else {
+					button.text('Uploading');				
+				}
+			}, 200);
+		},
+		onComplete: function(file, response){
+			button.text('Upload');
+						
+			window.clearInterval(interval);
+						
+			// enable upload button
+			this.enable();
+			eval('myjson=' + response + ';');
+			// add file to the list
+			//$('<li></li>').appendTo('#example1 .files').html("<div id='filecontent'><img src='icon/" + myjson.filetype + ".gif'> <img src=" + myjson.picaddress + "></div>");	
+			$('#picaddress').val(myjson.picaddress);		
+			$('#showpic').html("<img src='" + myjson.picaddress +"' width=180 height=200 align=center>");	
+							
+		}
+	});
+
+	
+});/*]]>*/
+</script>
+
+    <div class="container">
+	<div class="msg_info"> <a href="?m=teacher&a=ls">返回会员信息列表</a> </div>
+    <form action="?m=teacher&a=save" method="post" enctype="multipart/form-data" name="form1" id="form1">
+	<input name="degree" type="hidden" id="degree" size="46" value=""/>
+	<input name="duty" type="hidden" id="duty" size="46" value=""/>
+	<input name="searching" type="hidden" id="searching"  value=""/>
+	<input name="college" type="hidden" id="college" size="46" value=""/>
+	<input name="profession" type="hidden" id="profession" size="46" value=""/>
+	<input name="search_info" type="hidden" id="search_info" size="46" value=""/>
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+    <tr>
+        <td colspan="3" class="tb_head">添加会员信息</td>
+    </tr>
+        <tr>
+        <td width="215">姓名</td>
+          <td><input name="teacher_name" type="text" id="teacher_name" size="46" />
+            *</td>
+          <td width="215" rowspan="10"><div id="showpic" style="width:200px;height:200px;overflow:hidden;text-align:center;"> </div></td>
+      </tr>
+	  <tr>
+        <td width="134">类别</td>
+        <td><input name="groupid" type="radio" id="radio" value="2" checked="checked" />师联盟会员
+          <input name="groupid" type="radio" id="radio2" value="1" />教师
+		  </td>
+      </tr>
+	   <tr>
+        <td width="215">E-mail</td>
+        <td><input name="email" type="text" id="email" size="46" /></td>
+      </tr>
+    <tr>
+        <td width="215">性别</td>
+          <td><input name="gender" type="radio" id="state" value="1" checked="checked" />男<input type="radio" name="gender" id="state" value="0" />
+        女</td>
+      </tr>
+            <tr>
+        <td width="215">显示顺序</td>
+          <td><label>
+            <input name="orderby" type="text" id="orderby" size="46" />
+          显示顺序按照大小排列，越大越靠前，默认为添加的顺序</label></td>
+      </tr>
+            <tr>
+        <td width="215">出生年月</td>
+          <td width="890"><input name="birthday" type="text" id="birthday" size="46" /></td>
+      </tr>
+              <tr>
+        <td width="215">会员照片</td>
+          <td><input name="picaddress" type="input" id="picaddress"  class="required" title="您还没有上传图片呢" size="64" /> <div id="button1" class="upload">上传图片</div></td>
+      </tr>  
+            <tr>
+        <td width="215">电话</td>
+          <td><input name="telphone" type="text" id="telphone" size="46" /></td>
+      </tr>
+	  <tr>
+        <td width="215" height="21">传真</td>
+          <td colspan="2"><input name="fax" type="text" id="fax" size="46" /></td>
+    </tr>
+	<tr>
+        <td width="215">通信地址</td>
+          <td colspan="2"><input name="address" type="text" id="address" size="46" /></td>
+    </tr>
+	<tr>
+        <td width="215" colspan="3">&nbsp;</td>
+      </tr>
+			
+	<tr>
+        <td width="215">个人主页</td>
+          <td colspan="2"><input name="homepage" type="text" id="homepage" size="46" /></td>
+    </tr>
+	<tr>
+        <td width="215">补充说明</td>
+        <td colspan="2"><label>
+            <textarea name="patch" cols="90" rows="3" id="patch"></textarea>
+          </label></td>
+    </tr>
+	<tr>
+        <td width="215">个人简介</td>
+          <td colspan="2"><textarea id="content_1" name="teach_info" style="width:700px;height:200px;visibility:hidden;"></textarea></td><td width="8"></td>
+    </tr>
+	<tr>
+        <td colspan="3">&nbsp;</td>
+          </td>
+    </tr>
+                        <tr>
+        <td height="37" align="left">&nbsp;</td>
+          <td height="37" colspan="2" align="left"><input class="button" type="submit" name="addpic" id="addpic" value="添加教师" /></td>
+          </tr>
+    </table>
+    </form>
+    </div>
+<{include file="footer.htm"}>

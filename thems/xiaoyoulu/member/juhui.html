@@ -1,0 +1,104 @@
+<{include file="member/member_header.html"}>
+<link type="text/css" rel="stylesheet" href="style/jquery.rte.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.rte.js"></script>
+<script type="text/javascript" src="js/jquery.rte.tb.js"></script>
+<script type="text/javascript" src="js/jquery.ocupload-1.1.4.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var arr = $('.rte1').rte({
+		css: ['style/base.css'],
+		controls_rte: rte_toolbar,
+		controls_html: html_toolbar
+	});
+
+});
+</script>
+<div id="wrap_content">
+<div id="left_menu">
+<{include file="member/left_menu.html"}>
+</div>
+<div id="right_content">
+<{if $action == 'main'}>
+	<div class="title_tip">我发布的聚会：</div>
+	<table width="98%" border="1" class="bt_style">
+	  <tr>
+		<th width="400" height="19" align="left">聚会标题</th>
+		<th width="80" height="19" align="center">聚会时间</th>
+		<th align="left">操作</th>
+	  </tr>
+	  <{if $no_juhui}>
+	   <tr>
+		<td colspan="3" align="left">您没有发布聚会</td>
+	   </tr>
+	   <{else}>
+	  <{foreach from=$juhuilist item=ls}>
+	  <tr>
+		<td width="400" height="19" align="left"><{$ls.title}></td>
+		<td width="80" height="19" align="center"><{$ls.time|date_format:"%Y-%m-%d"}></td>
+		<td align="left"><a href="?c=juhui&action=add&id=<{$ls.juhuiid}>">发布</a> | <a href="?c=juhui&action=edit&id=<{$ls.juhuiid}>">修改</a> | <a href="?c=juhui&action=del&id=<{$ls.juhuiid}>">删除</a></td>
+	  </tr>
+	  <{/foreach}>
+	  
+	  <{/if}>
+	  </table>
+	  
+	<div class="title_tip">发布聚会：</div>
+	<form action="?c=juhui&action=save" method="post">
+	<table width="98%" border="1" class="bt_style">
+	  <tr>
+		<td width="124" height="19" align="right">标题：</td>
+		<td align="left"><input name="title" type="text" id="title" value="<{$title}>" size=32 /></td>
+	  </tr>
+	  
+	  <tr>
+		<td align="right">聚会时间:</td>
+		<td align="left"><{html_select_date prefix="juhui_" start_year="-1" end_year="+10" field_order="YMD" time=$juhui_time}></td>
+	  </tr>
+	  <tr>
+		<td align="right">描述:</td>
+		<td align="left"> <textarea id="content_1" name="description"  class="rte1" style="width:600px;height:300px;visibility:hidden;"><{$description}></textarea></td>
+	  </tr>
+	  <tr>
+		<td colspan="2" align="center" height="30"><label>
+		  <input type="submit" name="Submit" value="发布聚会" />
+		</label></td>
+		</tr>
+	</table>
+	</form>
+<{elseif $action == 'edit'}>
+	<div class="title_tip">修改聚会：</div>
+	<form action="?c=juhui&action=update" method="post">
+	<input type="hidden" name="juhuiid" id="juhuiid" value="<{$juhuiid}>"/>
+	<table width="98%" border="1" class="bt_style">
+	  <tr>
+		<td width="124" height="19" align="right">标题：</td>
+		<td align="left"><input name="title" type="text" id="title" value="<{$title}>" size=32/></td>
+	  </tr>
+	  
+	  <tr>
+		<td align="right">聚会时间:</td>
+		<td align="left"><{html_select_date prefix="juhui_" start_year="-1" end_year="+10" field_order="YMD" time=$juhui_time}></td>
+	  </tr>
+	  <tr>
+		<td align="right">描述:</td>
+		<td align="left"> <textarea id="content_1" name="description"  class="rte1" style="width:600px;height:300px;visibility:hidden;"><{$description}></textarea></td>
+	  </tr>
+	  <tr>
+		<td colspan="2" align="center" height="30"><label>
+		  <input type="submit" name="Submit" value="修改聚会" />
+		</label></td>
+		</tr>
+	</table>
+	</form>
+<{elseif $action == 'save'}>	
+	<div class="msgtip">聚会发布<{if $add_suc}>成功<{else}>失败<{/if}></div>	
+<{elseif $action == 'update'}>
+<div class="msgtip">聚会更新成功</div>	
+<{elseif $action == 'del'}>
+<div class="msgtip">删除聚会成功</div>	
+<{/if}>
+</div>
+<div class="clear"></div>
+</div>
+<{include file="footer.html"}>

@@ -1,0 +1,70 @@
+<{include file="header.html"}>
+<div id="content">
+<div id="con_left">
+	<div class="teachers">
+		  <dl>
+			  <dt><strong>联盟成员信息</strong></dt>
+
+<table width="684" border="1" class="teacher_tab">
+  <tr>
+    <td colspan="2"><{$teacher_name}> <{$profession}>&nbsp;&nbsp;&nbsp;<span><a href="#a" style="color:#993300;font-size:80%;padding-left:50px;padding-right:15px;width:100px;">[教学情况]</a></span> <span><a href="#b" style="color:#993300;font-size:80%;padding-right:5px;width:100px;">[学术研究]</a></span></td>
+    <td width="266" rowspan="8" align="center" valign="middle"><img src="<{$teacher_photo}>" width="160" height="200"></td>
+  </tr>
+  <tr>
+    <td width="84">职务</td>
+    <td width="312"><{$duty}></td>
+    </tr>
+  <tr>
+    <td>所在院系</td>
+    <td><{$college}></td>
+    </tr>
+  <tr>
+    <td>研究方向</td>
+    <td><{$searching}></td>
+    </tr>
+  <tr>
+    <td>电话</td>
+    <td><{$telphone}></td>
+    </tr>
+  <tr>
+    <td>传真</td>
+    <td><{$fax}></td>
+    </tr>
+  <tr>
+    <td>通信地址</td>
+    <td><{$address}></td>
+    </tr>
+  <tr>
+    <td>E-mail</td>
+    <td><{$email}></td>
+    </tr>
+  <tr>
+    <td>个人主页</td>
+    <td><a href="<{$homepage}>"><{$homepage}></a></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<a name="a" id="a"></a>
+<div class="teacher_spider">教学情况</div>
+<div class="content_post"><{$teach_info}></div>
+<a name="a" id="b"></a>
+<div class="teacher_spider">学术研究</div>
+<div class="content_post"><{$search_info}></div>
+		  </dl>
+	</div>
+	  </div>
+<div id="con_right">
+<div class="prolocutor">
+        <h2>课程负责人</h2>
+		<{foreach from=$head_teacher item=ls}>
+        <div class="photo_text"> <span class="photo"> <a href="teacher.php?q=d&id=<{$ls.tid}>"><img src="<{$ls.photo}>" width="90" height="118" alt="<{$ls.teacher_name}>" /></a></span> <strong class="name">
+          <a href="teacher.php?q=d&id=<{$ls.tid}>"><{$ls.teacher_name}></a><br /><em>职称:<{$ls.profession}></em><br /><em>学位:<{$ls.degree}></em><br /><em>职务:<{$ls.duty}></em></strong>
+          <p><{$ls.search}>[<a href="teacher.php?q=d&id=<{$ls.tid}>">了解详情</a>]</p>
+          <div class="clear">&nbsp;</div>
+        </div>
+		<{/foreach}>
+      </div>
+</div>
+<div class="clear"></div>
+</div>
+<{include file="footer.html"}>

@@ -1,0 +1,60 @@
+<{include file="header.htm"}>
+ <script src="js/ajaxupload.3.2.js" type="text/javascript"></script>
+<script type= "text/javascript">
+$(document).ready(function(){
+
+	$(".delpukepic").click(function(){
+	alert("hh");
+		//var delid = $(this).attr("id");
+		//$.get("admin.php?m=ajax&a=del_puke_pic",{'id':delid},function(data){
+			//if(data == 1) $(this).parent(".puke_img").remove(); else alert("删除失败");
+		//	});
+	});
+
+	var address_arr = new Array();
+	var i = 0;
+	//var upload_arr = new Array();
+	new Ajax_upload('#button2',{action: 'upload.php', name: 'picfile',onComplete: function(file, response){		
+			this.enable();
+			i++;
+			eval('myjson=' + response + ';');
+			//$("#picaddress").val(myjson.picaddress);
+			//tmppic = "<img src='./"+ myjson.picaddress + "' width=40 height=60>";
+			//$("#tmp_pic").html(tmppic);
+			//address_arr.push(myjson.picaddress);
+			$.post("admin.php?m=ajax&a=upload_puke",{'picaddress':myjson.picaddress,'photoid':<{$photoid}>},function(data){
+			if(data > 0){
+				htmldata = '<div class="puke_img" style="margin-left:15px;text-align:center;"><img src="./' + myjson.picaddress +'" width=50 height=60></a></div><span style="text-align:center;" ><a href="#"  class="delpukepic">删除图片</a></span>';
+				$('<li></li>').appendTo('#puke_container').html(htmldata);
+			}
+			if(data == 0){alert("上传失败！");}});
+		}});
+			
+	
+});
+</script>
+    <div class="container">
+	<div class="msg_info"> <a href="?m=photos&a=add">添加塔罗图鉴</a> |info-><{ $msg_info }></div>
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+ <tr>
+        <td colspan="2" class="tb_head">添加图片<span class="slice_a"><{$index_str}></span></td>
+    </tr>
+	<tr><td><div id="upload_file" >
+	<form action="admin.php?m=photos&a=upload_large" method="post" enctype="multipart/form-data" name="form1" id="form1" >
+	<input type="hidden" name="classid" id = "photoid" value="<{$photoid}>">
+	<input type="hidden" name="picaddress" id="picaddress">
+	<div id="button2" class="upload">上传图片</div> 
+	</form>
+	</div>
+		</td>
+		</tr>
+	<tr>
+        <td colspan="2">
+		<ul id="puke_container">
+		
+		</ul>
+		</td>
+    </tr>
+	</table>
+  </div>
+<{include file="footer.htm"}>

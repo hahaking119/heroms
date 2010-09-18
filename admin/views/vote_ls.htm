@@ -1,0 +1,107 @@
+<{include file="header.htm"}>
+<script type="text/javascript">
+$(function(){
+		   /*$(":input").mouseover(function(){
+										  $(this).addClass("bd_blue");
+										  }).mouseout(function(){
+											  $(this).removeClass("bd_blue");
+											  });
+		   
+		   });
+		   */
+		   //添加选项
+		   /*$("#addoption").click(function(){
+		   $("#options").append("<input name=option[] type=text id=option[] />");
+		   });
+		   $("#addoptions").dblclick( function () { alert("Hello World!"); }); 
+		   */
+		   function addoption(){
+		  
+		   alert("Hello World!");
+		   }
+//换频道显示
+		/*	$(".channel").ecah(function(){
+										if($(this).text() == 1){
+											$(this).text() = "文章频道";
+										}
+										});*/
+</script>
+<div class="container">
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="7" class="tb_head">投票列表</td>
+      </tr>
+      <tr>
+        <th width="30" height="24">编号</th>
+        <th width="106">投票主题</th>
+        <th>投票描述</th>
+		<th width="300">选项 </th>
+		<th width="192">创建时间</th>
+        <th width="83">操作</th>
+      </tr>
+      <{foreach from=$votelist item = ls}>
+            <tr>
+        <td height="23"><{$ls.voteid}></td>
+        <td align="center"><{$ls.title}></td>
+        <td align="left"> <{$ls.description}></td>
+		<td><{foreach from=$ls.options item = op}>
+		<div style="border-left:1px solid #ccc;border-bottom:1px dashed #ccc;border-right:1px solid #ccc;"><{if $ls.type == 1}><input type="radio"><{else}><input type="checkbox"><{/if}><{$op.options}> (<{$op.votes}>/<{$op.total}>) ->(<{$op.scale}>%) </div>
+		<{/foreach}></td>
+		<td><{$ls.created|date_format:"%y-%m-%d"}></td>
+        <td align="right"><a href="?m=vote&a=editindex&id=<{$ls.voteid}>">编辑</a> || <a href="?m=vote&a=del&id=<{$ls.voteid}>">删除</a> </td>
+      </tr>
+      <{/foreach}>
+    </table>
+    <form id="form1" name="form1" method="post" action="admin.php?m=vote&a=add">
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="2" class="tb_head">添加投票</td>
+      </tr>
+      <tr>
+        <td width="111">投票标题</td>
+        <td width="377"><input name="title" type="text" id="title" /></td>
+      </tr>
+      <tr>
+        <td>投票说明</td>
+        <td><label>
+          <textarea name="description" id="description" cols="60" rows="3"></textarea>
+        </label></td>
+      </tr>
+	  <tr>
+        <td>投票类型</td>
+        <td><label>
+          <input name="type" type="radio" value="1" checked="checked" />
+        单选
+        <input type="radio" name="type" value="2" />
+        多选
+        </label></td>
+	  </tr>
+	  <tr>
+        <td>选项1</td>
+        <td><input name="option[]" type="text" id="option[]" /></td>
+      </tr>
+	  <tr>
+        <td>选项2</td>
+        <td><input name="option[]" type="text" id="option[]" /></td>
+      </tr>
+	  <tr>
+        <td>选项3</td>
+        <td><input name="option[]" type="text" id="option[]" /></td>
+      </tr>
+	  <tr>
+        <td>选项4</td>
+        <td><input name="option[]" type="text" id="option[]" /> 
+        <img src="images/zoomin.gif" id="addoptions" onclick="addoption();">
+		<div id="options"></div></td>
+      </tr>
+      <tr>
+        <td height="64">&nbsp;</td>
+        <td><label>
+          <input type="submit" name="submit" id="submit" value="创建投票" />
+        </label></td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </form>
+</div>

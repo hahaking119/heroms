@@ -1,0 +1,82 @@
+﻿<{include file="header.htm"}>
+ <script src="js/ajaxupload.3.2.js" type="text/javascript"></script>
+<script type= "text/javascript">
+$(document).ready(function(){
+	var i = 0;
+	//var upload_arr = new Array();
+	new Ajax_upload('#button2',{action: 'upload.php', name: 'picfile',onComplete: function(file, response){		
+			this.enable();
+			i++;
+			eval('myjson=' + response + ';');
+			$("#picaddress").val(myjson.picaddress);
+			tmppic = "<img src='./"+ myjson.picaddress + "' width=130 height=180>";
+			$("#tmp_pic").html(tmppic);
+			//$('<li></li>').appendTo('#puke_container').html("<span class='tip'>0</span><div class='puke_img'><img src='./" + myjson.picaddress +"'></a></div><span><a href='#'>编辑</a><a href='#'> | </a><a href='#'>删除</a></span>" );
+			}
+			});
+});
+</script>
+    <div class="container">
+	<div class="msg_info"> <a href="?m=photos&a=add">添加塔罗图鉴</a> |info-><{ $msg_info }></div>
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+ <tr>
+        <td colspan="2" class="tb_head">添加图片<span class="slice_a"><{$index_str}></span></td>
+    </tr>
+	<tr><td>
+
+	<ul class="pukelist" id="puke_container">
+        <{ foreach from=$puke_list item=pls }>
+         <li>
+		 <span class="tip" style="color:#FFFFFF;"><font color="#ffffff"><{$pls.orderby}></font></span>
+		 <div class="puke_img">
+		 <a href="photos.php?q=fp&id=<{$pls.photoid}>" target="_blank"><img src="./<{$pls.picaddress}>" width="90" height="120"/></a>
+		 </div><input type="hidden" name="<{$pls.photoid}>" size="12" >
+		 <span></a><a href="?m=photos&a=pukedel&pukeid=<{$pls.pukeid}>">删除</a></span>
+        </li>
+		<div class="clear"></div>
+		<{ /foreach }>
+	</ul>
+	<div class="clear"></div>
+	<div id="upload_file" >
+	<form action="admin.php?m=photos&a=pukeadd" method="post" enctype="multipart/form-data" name="form1" id="form1">
+	<input type="hidden" name="classid" value="<{$photoid}>">
+	<input type="hidden" name="picaddress" id="picaddress">
+	<table width="412" border="0">
+  <tr>
+    <td colspan="2">添加扑克牌：<font color="#990000">[<{$title_cn}>]</font></td>
+    </tr>
+  <tr>
+    <td width="140" rowspan="4"><span id="tmp_pic"></span></td>
+    <td width="262">塔罗牌编号:
+      <label>
+      <input type="text" name="pukenumber" id="pukenumber"/>
+      </label></td>
+  </tr>
+  <tr>
+    <td>显示的顺序:
+      <label>
+      <input type="text" name="orderby" id="orderby"/>
+      </label></td>
+  </tr>
+  <tr>
+    <td><input name="upfile" type="button" class="upload"  id="button2" value="上传扑克牌图片"/></td>
+  </tr>
+  <tr>
+    <td>说明:<br /><label>
+      <textarea name="description" cols="35" rows="4"></textarea>
+    </label></td>
+  </tr>
+  <tr>
+    <td width="140">&nbsp;</td>
+    <td><label>
+      <input class="button" type="submit" name="addpic" id="addpic" value="添加塔罗牌" />
+    </label></td>
+  </tr>
+</table>
+
+	</form>
+	</div>
+		</td>
+		</tr></table>
+  </div>
+<{include file="footer.htm"}>

@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<{$charset}>" />
+<title><{$siteadmincp}></title>
+<link rel="stylesheet" href="images/admincp.css" type="text/css" media="all" />
+<meta http-equiv=refresh content=2;URL="<{$url}>">
+</head>
+<body>
+<div style="width:98%;;background:#fff;border-bottom:8px solid #D8D8D8;border-top:8px solid #D8D8D8;margin-top:20px;padding-top:15px;">
+<h4 class="<{$classname}>"><{if $type == 'success'}><img src="images/correct.gif" /><{else}><img src="images/error.gif" /><{/if}> <{$message}></h4>
+<p class="marginbot"><a href="<{$url}>" class="lightlink">页面正在跳转中,如果浏览器没有跳转请点击此处!</a></p>
+<script type="text/JavaScript">setTimeout("redirect('<{$url}>');", 2000);</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<?php
+$data = array(
+	'them'				=> 'hengsqi',
+	'language'			=> 'zh_cn',
+	'shop_closed'		=> 0,
+	'focus_template'	=> 2,
+);
+?>

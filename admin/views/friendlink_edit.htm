@@ -1,0 +1,66 @@
+<{include file="header.htm"}>
+<script language="javascript">
+$(document).ready(function(){
+	
+	$("#catname").blur(function(){
+		var cat_name = $("#catname").attr("value");
+		$.post("?m=ajax&a=pinyin",{"cstr":cat_name},function(data){
+			var catdir = $("#catdir").val();
+			if(!catdir){
+				$("#catdir").val(data);
+			}
+		
+		});
+	});
+	
+	$("#form2").submit(function(){
+		var cat_name = $("#catname").val();
+		var catdir = $("#catdir").val();
+		if(cat_name == ""){
+			alert("栏目部能为空");
+			return false;
+		}else if(catdir == "") {
+			alert("栏目目录不能为空");
+			return false;
+		}
+		return true;
+	});
+
+});
+</script>
+<div class="container">
+  <form id="form2" name="form2" method="post" action="admin.php?m=friendlink&a=edit">
+  <input type="hidden" name="linkid" value="<{$link.linkid}>">
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="2" class="tb_head">编辑友情链接</td>
+      </tr>
+      <tr>
+        <td>站点名称</td>
+        <td><input name="sitename" type="text" id="sitename" value="<{$link.sitename}>" size="64"/></td>
+      </tr>
+      <tr>
+        <td>站点网址</td>
+        <td><input name="siteurl" type="text" id="siteurl" value="<{$link.siteurl}>" size="64"/></td>
+      </tr>
+      <tr>
+        <td>站点描述</td>
+        <td><label>
+          <textarea name="sitedesc" id="sitedesc" cols="65" rows="3"><{$link.sitedesc}></textarea>
+        </label></td>
+      </tr>
+       <tr>
+        <td>显示顺序</td>
+        <td><input name="orderby" type="text" id="orderby" value="<{$link.orderby}>"/>值越大越靠前</td>
+      </tr>
+      <tr>
+        <td height="64">&nbsp;</td>
+        <td><label>
+          <input type="submit" name="submit" id="submit" value="修改链接" />
+        </label></td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </form>
+</div>

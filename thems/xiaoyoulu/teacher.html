@@ -1,0 +1,27 @@
+<{include file="header.html"}>
+<LINK href="<{$themdir}>style/news_09.css" type=text/css rel=stylesheet>
+<DIV class=BR_8></DIV>
+<DIV id="container">
+<DIV id="left">
+<div class="teachers">
+			  <dt><strong>师联盟成员</strong></dt>
+			  <div style="padding:6px;border:2px solid #FF9933;clear:both;margin:0 3px 10px;font-size:120%;font-weight:600;text-align:center; "><a href="./lianmeng.html">联盟介绍</a> <a href="./zhangcheng.html">联盟章程</a> <a href="./shenqing.html">如何申请</a> </div>
+			  <{foreach from=$teacher_list item=ls}>
+			  <dd class="teacher_list">
+				  <div class="teacher_photo"><img src="<{$ls.photo}>" width="86" height="100"/></div>
+				  <div class="teacher_summery">
+					  <h3><a href="members.php?q=d&id=<{$ls.tid}>"><{$ls.teacher_name}> </a></h3><p class="date">性别：<{if $ls.gender == 1}>男<{else}>女<{/if}> | E-Mail：<{$ls.email}> </p>
+					  <p class="text"><{$ls.search_info}>......<span class="more">[<a href="members.php?q=d&id=<{$ls.tid}>#a">详情</a>]</span></p>
+				  </div>
+				  <div class="clear"></div>
+			  </dd>
+			  <{/foreach}>
+			  <{$mutipage}>
+	</div>
+</DIV>
+<DIV id=right>
+<{include file="right.html"}>
+</DIV>
+<DIV class=BR></DIV></DIV>
+<DIV class=BR_20></DIV>
+<{include file="footer.html"}>

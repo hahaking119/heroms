@@ -1,0 +1,128 @@
+@charset "utf-8";
+/*----------Reset CSS for Browsers----------*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0; padding:0;}
+table{border-collapse:collapse; border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,th,var{font-style:normal; font-weight:normal;}
+ol,ul,li{list-style:none;}
+caption,th{text-align:left;}
+input,select{vertical-align:middle;}
+h1,h2,h3,h4,h5,h6{font-size:100%; font-weight:normal;}
+abbr,acronym{border:none; font-variant:normal;}
+
+/*----------Reset CSS for Website----------*/
+body{color:#303030; font-size:12px; background:#fff; text-align:left;}
+a:link{color:#333333; text-decoration:none;}
+a:visited{color:#333333; text-decoration:none;}
+a:hover{color:#f60; text-decoration:underline;}
+a:active{color:#303030; text-decoration:none;}
+
+.BR_3 {
+	CLEAR: both; FONT-SIZE: 0px; LINE-HEIGHT: 3px; HEIGHT: 3px
+}
+.BR_8 {
+	CLEAR: both; FONT-SIZE: 0px; LINE-HEIGHT: 8px; HEIGHT: 8px
+}
+.BR_10 {
+	CLEAR: both; FONT-SIZE: 0px; LINE-HEIGHT: 10px; HEIGHT: 10px
+}
+.BR_20 {
+	CLEAR: both; FONT-SIZE: 0px; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+.h104 {
+	HEIGHT: 104px
+}
+.txtleft {
+	TEXT-ALIGN: left
+}
+body{
+	background:#DFDFDD;
+	text-decoration:none;
+	color:#333;
+	/*text-indent: 1.6em;*/
+	line-height:24px;
+}
+body{color:#303030; font-size:12px;text-align:center;background:#535353 url(../images/body_bg.gif) repeat-y top center;;background-position: center center;background-attachment: fixed;}
+.logintitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; FONT-FAMILY: verdana, tahoma, sans-serif
+}
+.username {
+	BACKGROUND-POSITION: 1px 1px; PADDING-LEFT: 20px; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/username.gif); BACKGROUND-REPEAT: no-repeat; HEIGHT: 20px;width:190px;
+}
+.password {
+	BACKGROUND-POSITION: 1px 1px; PADDING-LEFT: 20px; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/password.gif); BACKGROUND-REPEAT: no-repeat; HEIGHT: 20px;width:190px;
+}
+.cGreen {
+	COLOR: #4a8109
+}
+.login{width:60px;height:24px;padding:1px;font-size:12px;line-height:24px;}
+.clear{clear:both; font-size:1px; height:0; line-height:0;}
+.clearfix{display:inline-block;}
+.clearfix:after{content:"."; clear:both; display:block; height:0; visibility:hidden;}
+.mt{margin-top:3px;}
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.wrap{text-align:left; width:1005px; margin:0 auto;display:block;}
+#header {text-align:left; width:1002px; margin:0 auto; line-height:22px;height:150px;overflow:hidden}
+
+
+#content{width:1000px; margin:8px auto 0;}
+#content h2{font-size:14px; font-weight:bold; padding:0 8px;}
+#content h2 span.more{float:right; font-size:12px; font-weight:400;}
+
+#con_left{width:726px; float:left;}
+#con_right{width:224px; float:right;}
+.art_list,
+.similar{border:solid 1px #cdcdcd;}
+.art_list h2,
+.similar h2{height:29px; line-height:29px; background:#EAF2FF url(../images/repeat_x.jpg) 0 -206px repeat-x; color:#f60;}
+
+.news_list h2 a.tab{display:block; color:#333; height:25px; line-height:25px; float:left; width:76px; text-align:center; margin-top:3px;}
+.news_list h2 a.current{border:solid 1px #CDE0EF; border-bottom:none; background:#fff; color:#f60;}
+
+.art_list h2 span.more,
+.similar h2 span.more{margin-top:10px;}
+.art_list ul{clear:both; padding:10px 10px 8px; _padding:10px 10px 7px;}
+.art_list li{height:22px; *height:auto;}
+.art_list li a,
+.news_list li a{display:block; height:22px; line-height:22px; background:url(../images/dot.gif) 0 10px no-repeat; padding-left:10px; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.news_list li a{width:152px; float:left;}
+.news_list li span{float:right; color:#666; font-family:Verdana, Geneva, sans-serif; font-size:11px;}
+.pages {
+padding:10px 0 5px;
+clear:both;
+text-align:center;
+background:#fff;
+border-bottom:solid 0px #0076be;
+font-size:12px;
+}
+.pages span.nextprev {
+border:1px solid #0076be;
+color:#999;
+font-size:12px;
+}
+.pages span.current {
+background:#0076be;
+border:1px solid #0076be;
+color:#FFF;
+font-weight:bold;
+font-size:12px;
+}
+.pages a:hover{border:solid 1px #5CB711;font-size:12px;background:#0076be;color:#FFF;}
+.pages a.nextprev {
+font-weight:bold;
+font-size:12px;
+}
+.pages a{
+font-size:12px;
+border:1px solid #0076be;
+color:#999;
+text-decoration:none;
+}
+.pages a, .pages span {
+font-size:12px;
+background:#FFF;
+margin:0 0.2em;
+padding:0.2em 0.5em;
+
+}

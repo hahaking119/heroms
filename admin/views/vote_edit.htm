@@ -1,0 +1,83 @@
+<{include file="header.htm"}>
+<script type="text/javascript">
+$(function(){
+		   /*$(":input").mouseover(function(){
+										  $(this).addClass("bd_blue");
+										  }).mouseout(function(){
+											  $(this).removeClass("bd_blue");
+											  });
+		   
+		   });
+		   */
+		   //添加选项
+		   /*$("#addoption").click(function(){
+		   $("#options").append("<input name=option[] type=text id=option[] />");
+		   });
+		   $("#addoptions").dblclick( function () { alert("Hello World!"); }); 
+		   */
+		   function addoption(){
+		  
+		   alert("Hello World!");
+		   }
+//换频道显示
+		/*	$(".channel").ecah(function(){
+										if($(this).text() == 1){
+											$(this).text() = "文章频道";
+										}
+										});*/
+</script>
+<div class="container">
+  <form id="form1" name="form1" method="post" action="admin.php?m=vote&a=edit">
+  <input type="hidden" name="voteid" value="<{$voteid}>" />
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="2" class="tb_head">修改投票</td>
+      </tr>
+      <tr>
+        <td width="111">投票标题</td>
+        <td width="377"><input name="title" type="text" id="title" value="<{$title}>"/></td>
+      </tr>
+      <tr>
+        <td>投票说明</td>
+        <td><label>
+          <textarea name="description" id="description" cols="100" rows="5"><{$description}></textarea>
+        </label></td>
+      </tr>
+	  <tr>
+        <td>投票类型</td>
+        <td><label><{if $type == 1}>
+          <input name="type" type="radio" value="1" checked="checked" />
+        单选
+        <input type="radio" name="type" value="2" />
+        多选
+		<{else}>
+		<input name="type" type="radio" value="1"  />
+        单选
+        <input type="radio" name="type" value="2" checked="checked" />
+        多选
+		<{/if}>
+        </label></td>
+	  </tr>
+	  <{foreach from=$options item=ls}>
+	  <tr>
+        <td>选项</td>
+        <td><input name="option[]" type="text" id="option[]" value="<{$ls.options}>"/></td>
+      </tr>
+	  <{/foreach}>
+	  <tr>
+        <td>继续添加选项</td>
+        <td>
+        <img src="images/zoomin.gif" id="addoptions" onclick="addoption();">
+		<div id="options"></div></td>
+      </tr>
+      <tr>
+        <td height="64">&nbsp;</td>
+        <td><label>
+          <input type="submit" name="submit" id="submit" value="更新投票" />
+        </label></td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </form>
+</div>

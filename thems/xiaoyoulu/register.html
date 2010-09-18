@@ -1,0 +1,162 @@
+<{include file="header.html"}>
+<script src="<{$themdir}>js/jquery.js" language="javascript"></script>
+<div class="wrap reg">
+<div class="regiter_tip">注册会员</div>
+<form action="?q=register" method="post" name="regForm" target="_self" id="regForm">
+<table width="600" border="0" class="reg_tab">
+  <tr>
+    <td width="115" align="right"><span class="red">*</span>用户名:</td>
+    <td width="469"><input name="username" type="text" id="username" maxlength="40" /> <span id="username_tip">用户名由3-20个英文字母或数字组成(不支持中文)</span></td>
+  </tr>
+   <tr>
+    <td width="115" align="right"><span class="red">*</span>真实姓名:</td>
+    <td width="469"><input name="realname" type="text" id="realname" maxlength="40" /><span id="realname_tip">请填写真实姓名</span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>密码:</td>
+    <td><input name="password" type="password" id="password" maxlength="20" /><span id="password_tip">密码由6-20个英文字母(区分大小写)或数字组成</span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>重复密码:</td>
+    <td><input name="repassword" type="password" id="repassword" maxlength="20" /><span id="repassword_tip"></span></td>
+  </tr>
+</table>
+<div class="regiter_tip">基本信息</div>
+<table width="600" border="0"  class="reg_tab">
+<tr>
+    <td align="right">性别：</td>
+    <td align="left">
+	  <label><input name="gender" type="radio" value="1" checked="checked" >帅哥</label>
+      <label><input type="radio" name="gender" value="2">美女</label>
+	  <label><input type="radio" name="gender" value="3">保密</label>
+	  </td>
+  </tr>
+<tr>
+    <td align="right" width="115">出生年月:</td>
+    <td width="469">
+		<select  name=birthyear class=form_checkbox><option value='1950'  >1950</option><option value='1951'  >1951</option><option value='1952'  >1952</option><option value='1953'  >1953</option><option value='1954'  >1954</option><option value='1955'  >1955</option><option value='1956'  >1956</option><option value='1957'  >1957</option><option value='1958'  >1958</option><option value='1959'  >1959</option><option value='1960'  >1960</option><option value='1961'  >1961</option><option value='1962'  >1962</option><option value='1963'  >1963</option><option value='1964'  >1964</option><option value='1965'  >1965</option><option value='1966'  >1966</option><option value='1967'  >1967</option><option value='1968'  >1968</option><option value='1969'  >1969</option><option value='1970'  >1970</option><option value='1971'  >1971</option><option value='1972'  >1972</option><option value='1973'  >1973</option><option value='1974'  >1974</option><option value='1975'  >1975</option><option value='1976'  >1976</option><option value='1977'  >1977</option><option value='1978'  >1978</option><option value='1979'  >1979</option><option value='1980'  >1980</option><option value='1981'  >1981</option><option value='1982'  >1982</option><option value='1983'  >1983</option><option value='1984'  >1984</option><option value='1985'  >1985</option><option value='1986'  >1986</option><option value='1987'  >1987</option><option value='1988'  >1988</option><option value='1989'  >1989</option><option value='1990'  >1990</option><option value='1991'  >1991</option><option value='1992'  >1992</option><option value='1993'  >1993</option><option value='1994'  >1994</option><option value='1995'  >1995</option><option value='1996'  >1996</option><option value='1997'  >1997</option><option value='1998'  >1998</option><option value='1999'  >1999</option><option value='2000'  >2000</option></select> 年 <select  name=birthmonth class=form_checkbox><option value='1'  >1</option><option value='2'  >2</option><option value='3'  >3</option><option value='4'  >4</option><option value='5'  >5</option><option value='6'  >6</option><option value='7'  >7</option><option value='8'  >8</option><option value='9'  >9</option><option value='10'  >10</option><option value='11'  >11</option><option value='12'  >12</option></select> 月 <select  name=birthday class=form_checkbox><option value='1'  >1</option><option value='2'  >2</option><option value='3'  >3</option><option value='4'  >4</option><option value='5'  >5</option><option value='6'  >6</option><option value='7'  >7</option><option value='8'  >8</option><option value='9'  >9</option><option value='10'  >10</option><option value='11'  >11</option><option value='12'  >12</option><option value='13'  >13</option><option value='14'  >14</option><option value='15'  >15</option><option value='16'  >16</option><option value='17'  >17</option><option value='18'  >18</option><option value='19'  >19</option><option value='20'  >20</option><option value='21'  >21</option><option value='22'  >22</option><option value='23'  >23</option><option value='24'  >24</option><option value='25'  >25</option><option value='26'  >26</option><option value='27'  >27</option><option value='28'  >28</option><option value='29'  >29</option><option value='30'  >30</option><option value='31'  >31</option></select> 日
+		</td>
+  </tr>
+  <tr>
+    <td align="right">家庭电话:</td>
+    <td align="left"><input name="homephone" type="text" id="homephone" value="<{$homephone}>" maxlength="20"/>
+      <label>
+      <input name="homephone_status" type="checkbox" id="homephone_status" value="checkbox"  />
+      公开</label></td>
+  </tr>
+  <tr>
+    <td align="right">办公电话:</td>
+    <td align="left"><input name="officephone" type="text" id="officephone" value="<{$officephone}>" maxlength="20"/>
+      <input name="officephone_status" type="checkbox" id="officephone_status" value="checkbox" >
+公开</td>
+  </tr>
+  <tr>
+    <td align="right">手机:</td>
+    <td align="left"><input name="mobile" type="text" id="mobile" value="<{$mobile}>" maxlength="20"/>
+      <input name="mobile_status" type="checkbox" id="mobile_status" value="checkbox" >
+公开</td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>Email:</td>
+    <td align="left"><input name="email" type="text" id="email" value="<{$email}>" maxlength="40"/><span id="email_tip"></span></td>
+  </tr>
+  <tr>
+    <td align="right">QQ:</td>
+    <td align="left"><input name="qq" type="text" id="qq" value="<{$qq}>" maxlength="12"/></td>
+  </tr>
+  <tr>
+    <td align="right">MSN:</td>
+    <td align="left"><input name="msn" type="text" id="msn" value="<{$msn}>" maxlength="20"/></td>
+  </tr>
+  </table>
+  <p><input name="提交" type="submit" class="button1" id="sub" value="注 册" />
+  </p>
+  </form>
+<script language="javascript">
+$(function(){
+	$("#username").blur(function(){
+	username = $("#username").val();
+	var msg;
+	$.get("check.php", { q:"user",username: username },
+	  function(data){
+		if(data == 1){
+			msg = "<span class=green>此用户名可以注册</span>";
+		}else if(data == -1){		
+			msg = "<span class=red>用户名不合法</span>";
+		}else if(data == -2){
+			msg = "<span class=red>包含要允许注册的词语</span>";
+		}else if(data == -3){
+			msg = "<span class=red>用户名已经存在</span>";
+		}
+		$("#username_tip").empty();	
+		$("#username_tip").append(msg);		
+	  }); 
+	});
+	
+	
+	$("#email").blur(function(){
+	email = $("#email").val();
+	var msg;
+	$.get("check.php", { q:"mail",email: email },
+	  function(data){
+		if(data == 1){
+			msg = "<span class=green>Email验证通过</span>";
+		}else if(data == -4){		
+			msg = "<span class=red>Email 格式有误</span>";
+		}else if(data == -5){
+			msg = "<span class=red>Email 不允许注册</span>";
+		}else if(data == -6){
+			msg = "<span class=red>该 Email 已经被注册</span>";
+		}
+		$("#email_tip").empty();	
+		$("#email_tip").append(msg);		
+	  }); 
+	});
+	
+	$("#regForm").submit(function(){
+		username = $("#username").val();
+		email = $("#email").val();
+		pass = $("#password").val();
+		repass = $("#repassword").val();
+		result = true;
+		if(pass.length >20 || pass.length < 6){
+				$("#password_tip").empty();
+				$("#password_tip").append("<span class=red >请输入长度为6-20的密码</span>");	
+			result = false;
+		}else{
+			$("#password_tip").empty();
+		}
+		if(pass != repass){
+			$("#repassword_tip").empty();
+			$("#repassword").empty();
+			$("#repassword_tip").append("<span class=red >两次输入密码不一致</span>");	
+			result = false;
+		}
+		if(username.length < 3){
+			$("#username_tip").empty();	
+			$("#username_tip").append("<span class=red >请输入用户名</span>");	
+			result = false;
+		}
+		if(username.length < 2){
+			$("#realname_tip").empty();	
+			$("#realname_tip").append("<span class=red >请输入真实姓名</span>");	
+			result = false;
+		}else{
+			$("#realname_tip").empty();
+		}
+		if(email.length < 2){
+			$("#email_tip").empty();	
+			$("#email_tip").append("<span class=red >请输入Email</span>");	
+			result = false;
+		}else{
+			$("#email_tip").empty();
+		}
+		return result;
+		
+	});
+	
+});
+</script>
+<DIV class=BR_20></DIV>
+</div>
+<{include file="footer.html"}>

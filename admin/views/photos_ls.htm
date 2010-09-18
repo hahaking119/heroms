@@ -1,0 +1,20 @@
+﻿<{include file="header.htm"}>
+    <div class="container">
+	<div class="msg_info"> <a href="?m=photos&a=add">添加塔罗图鉴</a> |info-><{ $msg_info }></div>
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+ <tr>
+        <td colspan="2" class="tb_head">添加图片<span class="slice_a"><{$index_str}></span></td>
+    </tr>
+	<tr><td>
+	<ul class="piclist">
+        <{ foreach from=$photo_list item=pls }>
+         <li>
+		 <a href="photos.php?q=fp&id=<{$pls.photoid}>" target="_blank"><img src="./<{$pls.picaddress}>" width="70" height="120"/></a><span><{$pls.title_cn}></span>
+		 <br /><a href="admin.php?m=photos&a=largeupload&id=<{$pls.photoid}>">批量上传</a><a href="#"> <br /> <a href="admin.php?m=photos&a=pukeedit&id=<{$pls.photoid}>">管理</a><a href="#"> <br /> </a><a href="?m=photos&a=editindex&id=<{$pls.photoid}>">编辑</a><a href="#"> <br /> </a><a href="?m=photos&a=del&id=<{$pls.photoid}>">删除</a>
+        </li>
+		<{ /foreach }>
+	</ul>
+		</td>
+		</tr></table>
+  </div>
+<{include file="footer.htm"}>

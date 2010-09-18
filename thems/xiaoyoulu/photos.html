@@ -1,0 +1,23 @@
+<{include file="header.html"}>
+	<div class="wrap">
+	<div id="sindex_bar"></div>
+		<div id="photo_list">
+		<div class="photo_nav"><a href="index.php">主页</a> > <a href="photos.php">校友相册</a><{if $action == 'user'}> > <{$realname}>的相册<{elseif $action == 'class'}> > <a href="photos.php?q=user&id=<{$userid}>"><{$realname}>的相册</a> > <{$classname}><{/if}></div>
+		<ul>
+		<{if $nullmsg}>
+		<{$nullmsg}>
+		<{else}>
+		<{foreach from=$abulm_list item=pls}>
+		<li>
+		<a href="photos.php?q=d&id=<{$pls.photoid}>" target="_blank"><img src="./<{$pls.pics}>" width="120" height="120"/></a>
+		<span class="photo_desc"><{$pls.title_cn}></span>
+		</li>
+		<{/foreach}>
+		<{/if}>
+		</ul>
+		<{$mutipage}>
+			</div>
+			
+	</div>	
+	<div class="mt10"></div>
+<{include file="footer.html"}>

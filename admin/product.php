@@ -1,0 +1,86 @@
+<?php
+//投票管理
+loadModel('product');
+$product = new product();
+loadModel('calling');
+$calling = new calling();
+switch ($a) {
+	case 'ls' :
+		$cat_list = $calling->getCallingList();
+		$cat_select = array();
+		foreach($cat_list as $v){
+			$cat_select[$v['catid']] = $v['catname'];
+		}
+		$smarty->assign('cat_select',$cat_select);
+		$prolist = $product->getProductList(null,$page,$pagesize);
+		$smarty->assign('prolist',$prolist);
+		$smarty->display('product.htm');
+		break;
+	case 'add' :
+		$cid = isset($_GET['cid']) ? intval($_GET['cid']) : 0;
+		$cat_list = $calling->getCallingList();
+		$cat_select = array();
+		foreach($cat_list as $v){
+			$cat_select[$v['catid']] = $v['catname'];
+		}
+		$smarty->assign('cat_select',$cat_select);
+		$smarty->assign('catid',$cid);
+		$smarty->display('product.htm');
+		break;
+	case 'save' :
+		$title = trim($_POST['title']);
+		$content = $_POST['content'];
+		$catid = intval($_POST['catid']);
+		$img = trim($_POST['picaddress']);
+		$size = trim($_POST['size']);
+		$config = trim($_POST['config']);
+		$catid = intval($_POST['catid']);
+		$top_flag = isset($_POST['top_flag']) ? 1 : 0;
+		$time = time();
+		$sql = "INSERT INTO {$tablepre}product (catid,title,img,size,config,content,created,updated,top_flag) VALUES ('$catid','$title','$img','$size','$config','$content','$time','$time','$top_flag')";
+		$db->query($sql);
+		$pid = $db->insert_id();	
+		showmsg('产品添加成功',PRE_URL,'success');
+		break;
+	case 'editindex' :
+		$voteid = isset($_GET['id']) ? intval($_GET['id']) : '';
+		if(empty($voteid)){
+			showmsg('没有要选择编辑的投票，操作禁止',PRE_URL);
+		}
+		$catinfo = $product->getOneVote($voteid);
+		foreach($catinfo as $k=>$v){
+			$smarty->assign($k,$v);
+		}
+		$smarty->display('product.htm');
+		break;
+	case 'edit' :
+		$title = trim($_POST['title']);
+		$description = $_POST['description'];
+		$voteid = intval($_POST['voteid']);
+		$type = intval($_POST['type']);
+		$username = $_SESSION['username'];
+		$options = doOptions($_POST['option']);
+		$sql = "UPDATE {$tablepre}product SET catid='$catid',title = '$title',content = '$content' WHERE pid = '$pid'";
+		$db->query($sql);
+		$vote->DelOptionsById($voteid);
+		showmsg($title.'产品编辑成功',PRE_URL,'success');
+		break;
+		
+	case 'del' :
+		$pid = isset($_GET['id']) ? intval($_GET['id']) : '';
+		if(empty($pid)){
+			showmsg('没有要选择删除的投票，操作禁止',PRE_URL);
+		}
+		if($vote->DelProductById($pid)){
+			showmsg('投票删除成功',PRE_URL,'success');
+		}else{
+			showmsg('删除失败可能投票不存在',PRE_URL);
+		}
+		break;
+}
+
+function trimall($v){
+	$v = trim($v);
+	$s = empty($v) ? false : true;
+	return $s;
+}

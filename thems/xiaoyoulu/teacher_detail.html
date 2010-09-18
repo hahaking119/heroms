@@ -1,0 +1,62 @@
+<{include file="header.html"}>
+<LINK href="<{$themdir}>style/news_09.css" type=text/css rel=stylesheet>
+<DIV class=BR_8></DIV>
+<DIV id="container">
+<DIV id="left">
+<DIV class="container">
+<DIV id="breadcrumb">您所在的位置：<a href="<{$hostname}>">首页</a>&raquo;<a href="members.php">塔罗师联盟</a>&raquo; <{$teacher_name}></DIV>
+ <div class="teachers_d">
+			  <dt><strong>联盟成员信息</strong></dt>
+			  <dl id="teacher_info">
+<img src="<{$teacher_photo}>" width="160" height="200" style="float:left;padding-right:10px;">
+姓名：<span style="color:#990000;font-size:120%;font-weight:600;"><{$teacher_name}></span><br />
+性别：<{if $gender == 1}>男<{else}>女<{/if}><br />
+E-Mail:<{$email}><br />
+个人主页：<{$teacher_name}><a href="<{$homepage}>"><{$homepage}></a><br />
+简介：<br />
+<a name="a" id="a"></a>
+<div class="content_post"><{$teach_info}></div>
+		  </dl>
+	</div>
+</DIV>
+<DIV class=BR_8></DIV>
+</DIV>
+<DIV id=right>
+<DIV class=hot>
+<UL>
+  <LI class=tit><EM>塔罗会馆认证</EM>会馆认证系统是基于会馆多年来实际培训和咨询的经验，我们更注重你作为职业咨询师的的实际能力和经验，而非你在神秘学方面的学识，会馆认证体系目前包括塔罗等……<a href="">[了解更多]&raquo;</a>
+  </UL>
+</DIV>
+
+<DIV class="info_list">
+<div class="title">塔罗鉴赏</div>
+<UL id="hot_photos_list">
+<{foreach from=$side_photos item=pls}>
+			<li>
+			<a href="photos.php?q=d&id=<{$pls.photoid}>" target="_blank"><img src="./<{$pls.picaddress}>" width="100" height="120" alt="<{$pls.title_en}>"/></a><span class="photo_desc"><dl><a href="photos.php?q=d&id=<{$pls.photoid}>" target="_blank"><{$pls.title_cn}></a></dl></span>
+			</li>
+<{/foreach}>
+</UL>
+</DIV>
+
+<DIV class=bann id=MyMoveAd 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; OVERFLOW: hidden; WIDTH: 280px; PADDING-TOP: 0px; HEIGHT: 1px">
+</DIV>
+<DIV class="top10">
+	<div class="tt">热点推荐</div>
+  <DIV class="list" id=top10_1 style="DISPLAY: block">
+	  <UL>
+	  <{foreach from=$hot_data item=ls}>
+		<LI><A title="<{$ls.title}>" href="<{$ls.link_url}>" target="_blank" title="<{$ls.title}>"><{$ls.title}></A> </LI>
+	  <{/foreach}>
+	  </UL>
+  </DIV>
+</DIV>
+
+<DIV class=BR_10></DIV>
+<DIV class=dingy></DIV>
+
+</DIV>
+<DIV class=BR></DIV></DIV>
+<DIV class=BR_20></DIV>
+<{include file="footer.html"}>

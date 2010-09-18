@@ -1,0 +1,143 @@
+﻿<{include file="header.htm"}>
+<script src="js/ajaxupload.3.2.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" language="javascript" src="libs/kindeditor/kindeditor.js"></script>
+<script src="js/jquery.crayonbox.js" type="text/javascript"></script>
+<script type="text/javascript">
+       KE.show({
+           id : 'content_1',
+		   cssPath : './libs/kindeditor/index.css'
+       });
+   </script>
+<script type= "text/javascript">/*<![CDATA[*/
+$(document).ready(function(){
+
+$("#title_en").blur(function(){
+		var title_en = $("#title_en").attr("value");
+		en_index = title_en.substring(0,1);
+		if(en_index != "") $("#sindex").val(en_index.toLocaleUpperCase());
+	});
+
+	/* example 1 */
+	var button = $('#button1'), interval;
+	new Ajax_upload(button,{
+		//action: 'upload-test.php', // I disabled uploads in this example for security reasons
+		action: 'upload.php', 
+		name: 'picfile',
+		onSubmit : function(file, ext){
+			// change button text, when user selects file			
+			button.text('Uploading');
+			// If you want to allow uploading only 1 file at time,
+			// you can disable upload button
+			this.disable();
+			if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+				/* Setting data */
+				this.setData({
+					'key': 'This string will be send with the file'
+				});
+			} else {
+				// extension is not allowed
+				alert("不是图片格式，不允许上传");
+				// cancel upload
+				this.enable();
+				return false;				
+			}
+			
+			// Uploding -> Uploading. -> Uploading...
+			interval = window.setInterval(function(){
+				var text = button.text();
+				if (text.length < 13){
+					button.text(text + '.');					
+				} else {
+					button.text('Uploading');				
+				}
+			}, 200);
+		},
+		onComplete: function(file, response){
+			button.text('Upload');
+						
+			window.clearInterval(interval);
+						
+			// enable upload button
+			this.enable();
+			eval('myjson=' + response + ';');
+			// add file to the list
+			//$('<li></li>').appendTo('#example1 .files').html("<div id='filecontent'><img src='icon/" + myjson.filetype + ".gif'> <img src=" + myjson.picaddress + "></div>");	
+			$('#picaddress').val(myjson.picaddress);		
+			$('#content').html("<img src='images/icon/" + myjson.filetype + ".gif'><img src='" + myjson.picaddress +"' width=320 height=200>");	
+							
+		}
+	});
+
+	
+});/*]]>*/
+</script>
+	<style type="text/css"> 
+.crayon {color: #000;width:200px; 
+cursor: pointer; 
+border: 1px solid #333; 
+float: left; 
+font-family: Fixed, monospace; 
+margin: 1px; text-align: center; 
+width: 1em; } 
+	</style> 
+    <div class="container">
+	<div class="msg_info"> <a href="?m=photos&a=ls">返回图鉴列表</a> </div>
+    <form action="?m=photos&a=edit" method="post" enctype="multipart/form-data" name="form1" id="form1">
+	<input type="hidden" name="photoid" value="<{$photoid}>">
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+    <tr>
+        <td colspan="2" class="tb_head">修改图鉴</td>
+    </tr>
+           
+            <tr>
+        <td width="134">图鉴英文标题</td>
+          <td><input name="title_en" type="text" id="title_en" size="64" value="<{$title_en}>"/>
+          *</td>
+    </tr>
+	 <tr>
+        <td width="134">索引号</td>
+          <td><input name="sindex" type="text" id="sindex" size="64"  value="<{$sindex}>"/>
+          *</td>
+    </tr>
+	<tr>
+        <td width="134">图鉴中文标题</td>
+          <td><input name="title_cn" type="text" id="title_cn" size="64" value="<{$title_cn}>"/>
+          *</td>
+    </tr>
+              <tr>
+        <td width="134">图片地址</td>
+          <td><input name="picaddress" type="input" id="picaddress"  class="required" title="您还没有上传图片呢" size="64" value="<{$pics}>"/> 
+		  <div id="button1" class="upload">上传图片</div> <div id="picinfo" style="width:150px;padding-left:10px;float:left;"></div></td>
+    </tr>
+	<tr>
+          <td width="134">图鉴描述</td>
+          <td><textarea id="content_1" name="content" style="width:700px;height:300px;visibility:hidden;"><{$description}></textarea></td>
+            </tr>
+			<tr>
+        <td width="134">作者</td>
+          <td> <input name="author" type="author"  size="22"  value="<{$author}>"/></td>
+    </tr>
+	<tr>
+        <td width="134">绘制</td>
+          <td> <input name="draw" type="text" id="draw" size="22"  value="<{$draw}>"/></td>
+    </tr>
+	<tr>
+        <td width="134">张数</td>
+          <td> <input name="counts" type="text" id="counts" size="22"  value="<{$counts}>"/></td>
+    </tr>
+	<tr>
+        <td width="134">出版公司</td>
+          <td> <input name="publisher" type="text" id="publisher" size="22"  value="<{$publisher}>"/></td>
+    </tr>
+	<tr>
+        <td width="134">发行时间</td>
+          <td> <input name="pubtime" type="text" id="created" size="22"  value="<{$pubtime}>"/></td>
+    </tr>
+                        <tr>
+        <td height="37" align="left">&nbsp;</td>
+          <td height="37" align="left"><input class="button" type="submit" name="addpic" id="addpic" value="修改图鉴" /></td>
+          </tr>
+    </table>
+    </form>
+    </div>
+<{include file="footer.htm"}>

@@ -1,0 +1,165 @@
+<{include file="header.html"}>
+<script src="<{$themdir}>js/jquery.js" language="javascript"></script>
+<div class="wrap reg">
+<div class="regiter_tip">注册会员</div>
+<form action="?q=register" method="post" name="regForm" target="_self" id="regForm">
+<table width="600" border="0" class="reg_tab">
+  <tr>
+    <td width="115" align="right"><span class="red">*</span>用户名:</td>
+    <td width="469"><input name="username" type="text" id="username" maxlength="40" /> <span id="username_tip">用户名由3-20个英文字母或数字组成(不支持中文)</span></td>
+  </tr>
+   <tr>
+    <td width="115" align="right"><span class="red">*</span>真实姓名:</td>
+    <td width="469"><input name="realname" type="text" id="realname" maxlength="40" /><span id="realname_tip">请填写真实姓名</span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>密码:</td>
+    <td><input name="password" type="password" id="password" maxlength="20" /><span id="password_tip">密码由6-20个英文字母(区分大小写)或数字组成</span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>重复密码:</td>
+    <td><input name="repassword" type="password" id="repassword" maxlength="20" /><span id="repassword_tip"></span></td>
+  </tr>
+</table>
+<div class="regiter_tip">基本信息</div>
+<table width="600" border="0"  class="reg_tab">
+<tr>
+    <td align="right">性别：</td>
+    <td align="left">
+	  <label><input name="gender" type="radio" value="1" checked="checked" >帅哥</label>
+      <label><input type="radio" name="gender" value="2">美女</label>
+	  <label><input type="radio" name="gender" value="3">保密</label>
+	  </td>
+  </tr>
+<tr>
+    <td align="right" width="115">出生年月:</td>
+    <td width="469"><input name="birthyear" type="text" id="birthyear" size="4" maxlength="4" />
+      年
+        <input name="birthmonth" type="text" id="birthmonth" size="2" maxlength="2" />
+        月
+        <input name="birthday" type="text" id="birthday" size="2" maxlength="2" />
+        日</td>
+  </tr>
+  <tr>
+    <td align="right">家庭电话:</td>
+    <td align="left"><input name="homephone" type="text" id="homephone" value="<{$homephone}>" maxlength="20"/>
+      <label>
+      <input name="homephone_status" type="checkbox" id="homephone_status" value="checkbox"  />
+      公开</label></td>
+  </tr>
+  <tr>
+    <td align="right">办公电话:</td>
+    <td align="left"><input name="officephone" type="text" id="officephone" value="<{$officephone}>" maxlength="20"/>
+      <input name="officephone_status" type="checkbox" id="officephone_status" value="checkbox" >
+公开</td>
+  </tr>
+  <tr>
+    <td align="right">手机:</td>
+    <td align="left"><input name="mobile" type="text" id="mobile" value="<{$mobile}>" maxlength="20"/>
+      <input name="mobile_status" type="checkbox" id="mobile_status" value="checkbox" >
+公开</td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>Email:</td>
+    <td align="left"><input name="email" type="text" id="email" value="<{$email}>" maxlength="40"/><span id="email_tip"></span></td>
+  </tr>
+  <tr>
+    <td align="right">QQ:</td>
+    <td align="left"><input name="qq" type="text" id="qq" value="<{$qq}>" maxlength="12"/></td>
+  </tr>
+  <tr>
+    <td align="right">MSN:</td>
+    <td align="left"><input name="msn" type="text" id="msn" value="<{$msn}>" maxlength="20"/></td>
+  </tr>
+  </table>
+  <p><input name="提交" type="submit" class="button1" id="sub" value="注 册" />
+  </p>
+  </form>
+<script language="javascript">
+$(function(){
+	$("#username").blur(function(){
+	username = $("#username").val();
+	var msg;
+	$.get("check.php", { q:"user",username: username },
+	  function(data){
+		if(data == 1){
+			msg = "<span class=green>此用户名可以注册</span>";
+		}else if(data == -1){		
+			msg = "<span class=red>用户名不合法</span>";
+		}else if(data == -2){
+			msg = "<span class=red>包含要允许注册的词语</span>";
+		}else if(data == -3){
+			msg = "<span class=red>用户名已经存在</span>";
+		}
+		$("#username_tip").empty();	
+		$("#username_tip").append(msg);		
+	  }); 
+	});
+	
+	
+	$("#email").blur(function(){
+	email = $("#email").val();
+	var msg;
+	$.get("check.php", { q:"mail",email: email },
+	  function(data){
+		if(data == 1){
+			msg = "<span class=green>Email验证通过</span>";
+		}else if(data == -4){		
+			msg = "<span class=red>Email 格式有误</span>";
+		}else if(data == -5){
+			msg = "<span class=red>Email 不允许注册</span>";
+		}else if(data == -6){
+			msg = "<span class=red>该 Email 已经被注册</span>";
+		}
+		$("#email_tip").empty();	
+		$("#email_tip").append(msg);		
+	  }); 
+	});
+	
+	$("#regForm").submit(function(){
+		username = $("#username").val();
+		email = $("#email").val();
+		pass = $("#password").val();
+		repass = $("#repassword").val();
+		result = true;
+		if(pass.length >20 || pass.length < 6){
+				$("#password_tip").empty();
+				$("#password_tip").append("<span class=red >请输入长度为6-20的密码</span>");	
+			result = false;
+		}else{
+			$("#password_tip").empty();
+		}
+		if(pass != repass){
+			$("#repassword_tip").empty();
+			$("#repassword").empty();
+			$("#repassword_tip").append("<span class=red >两次输入密码不一致</span>");	
+			result = false;
+		}
+		if(username.length < 3){
+			$("#username_tip").empty();	
+			$("#username_tip").append("<span class=red >请输入用户名</span>");	
+			result = false;
+		}
+		if(username.length < 2){
+			$("#realname_tip").empty();	
+			$("#realname_tip").append("<span class=red >请输入真实姓名</span>");	
+			result = false;
+		}else{
+			$("#realname_tip").empty();
+		}
+		if(email.length < 2){
+			$("#email_tip").empty();	
+			$("#email_tip").append("<span class=red >请输入Email</span>");	
+			result = false;
+		}else{
+			$("#email_tip").empty();
+		}
+		return result;
+		
+	});
+	
+});
+</script>
+<DIV class=BR_20></DIV>
+</div>
+<{include file="footer.html"}>
