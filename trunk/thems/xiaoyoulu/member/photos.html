@@ -1,0 +1,42 @@
+<{include file="member/member_header.html"}>
+<div id="wrap_content">
+<div id="left_menu">
+<{include file="member/left_menu.html"}>
+</div>
+<div id="right_content">
+<{if $action == 'main'}>
+		<div id="photo_list">
+			<ul>
+			<{foreach from=$photo_list item=pls}>
+				<li>
+				<a href="photos.php?q=d&id=<{$pls.photoid}>" target="_blank"><img src="./<{$pls.picaddress}>" width="70" height="120"/></a>
+				<span class="photo_desc"><dl><{$pls.title_cn}></dl><dl>张数：<{$pls.counts}></dl><dl>出版公司:<{$pls.publisher}></dl></span>
+				</li>
+			<{/foreach}>
+			</ul>
+		<{$mutipage}>
+		</div>
+<{elseif $action == 'editclass'}>
+
+<{elseif $action == 'editphoto'}>
+
+<{elseif $action == 'classlist'}>
+<div class="title_tip">相册分类：</div>
+<table width="600" border="1" class="bt_style">
+  <tr>
+    <th width="400" height="19" align="right">相册名称</th>
+    <th width="150" align="left">操作</th>
+  </tr>
+  <{foreach from=$abullist item=ls}>
+  <tr>
+    <td width="400" height="19" align="right"><{$ls.title_cn}></td>
+    <td width="150" align="left"><a href="?c=abulm&q=addphoto&classid=<{$ls.classid}>">添加照片</a> | <a href="?c=abulm&q=updateclass&classid=<{$ls.classid}>">修改</a> | <a href="?c=abulm&q=delclass&classid=<{$ls.classid}>">删除</a></td>
+  </tr>
+  <{/foreach}>
+  </table>
+
+<{/if}>
+</div>
+<div class="clear"></div>
+</div>
+<{include file="footer.html"}>

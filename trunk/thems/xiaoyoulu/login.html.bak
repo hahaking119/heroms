@@ -1,0 +1,49 @@
+<{include file="header.html"}>
+<script src="<{$themdir}>js/jquery.js" language="javascript"></script>
+<div class="wrap reg">
+<div class="regiter_tip">会员登录</div>
+<form action="?q=login" method="post" name="regForm" target="_self" id="regForm">
+<table width="600" border="0" class="login_tab">
+  <tr>
+    <td width="115" align="right"><span class="red">*</span>用户名:</td>
+    <td width="469"><input name="username" type="text" id="username" maxlength="40" /><span id="username_tip"></span></td>
+  </tr>
+  <tr>
+    <td align="right"><span class="red">*</span>密码:</td>
+    <td><input name="password" type="password" id="password" maxlength="20" /><span id="password_tip"></span></td>
+  </tr>
+</table>
+
+  <p style="padding-left:150px;"><input name="提交" type="submit" class="button1" id="sub" value=" 登 录"  />
+  </p>
+  </form>
+<script language="javascript">
+$(function(){
+	
+	$("#regForm").submit(function(){
+		username = $("#username").val();
+		pass = $("#password").val();
+		repass = $("#repassword").val();
+		result = true;
+		if(pass.length >20 || pass.length < 6){
+				$("#password_tip").empty();
+				$("#password_tip").append("<span class=red >请输入长度为6-20的密码</span>");	
+			result = false;
+		}else{
+			$("#password_tip").empty();
+		}
+		
+		if(username.length < 3){
+			$("#username_tip").empty();	
+			$("#username_tip").append("<span class=red >请输入用户名</span>");	
+			result = false;
+		}
+		return result;
+		
+	});
+	
+});
+</script>
+<DIV class=BR_20></DIV>
+</div>
+<{include file="footer.html"}>

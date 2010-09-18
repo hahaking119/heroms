@@ -1,0 +1,51 @@
+<{include file="header.html"}>
+<LINK href="<{$themdir}>style/news_09.css" type=text/css rel=stylesheet>
+<DIV class=BR_8></DIV>
+<DIV class=banner>
+<object  classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="958" height="90"  style="float:left;">
+      <param name="movie" value="<{$themdir}>images/flash_visual_member.swf">
+      <!--<param name="movie" value="http://adv.mysteel.com/xiben/mysteelad.swf">-->
+      <param name="quality" value="high">
+      <embed src="<{$themdir}>images/flash_visual_member.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="958" height="90"></embed>
+</object>
+</DIV>
+<DIV id="container">
+<DIV id="left">
+<DIV class="container">
+<DIV id="breadcrumb">您所在的位置：<a href="<{$hostname}>">首页</a>&raquo;<{$address}>&raquo;<{$title}> </DIV>
+ <div class="con">
+  <H2><{$title}></H2>
+  <div class="msg">发布时间:<{$created|date_format:"%Y-%m-%d %T"}> &nbsp;作者:&nbsp;<{$author}> &nbsp; 浏览:<{$clicks}> &nbsp;
+  </div>
+  <DIV class=BR_3></DIV>
+  <{if $thumb}><div style="text-align:center;padding:5px;"><img src="<{$thumb}>"></div><{/if}>
+  <{$content}>
+ <BR>
+ </div>
+<DIV class=BR_20></DIV>
+<DIV class=lij><SPAN>上文： <{if $pre}><A 
+href="article.php?q=d&id=<{$pre.articleid}>" 
+target=_self><{$pre.title}></A><{else}>暂无<{/if}> 下文：<{if $next}> <A 
+href="article.php?q=d&id=<{$next.articleid}>" target=_self><{$next.title}></A><{else}> 暂无 <{/if}></SPAN></DIV></DIV>
+<DIV class=BR_8></DIV>
+</DIV>
+<DIV id=right>
+<{include file="right.html"}>
+<DIV class="top10">
+	<div class="tt">论坛推荐</div>
+  <DIV style="DISPLAY: block">
+	  <UL>
+	  <script type="text/javascript" src="http://www.xjtunj.com/new/bbs/api/javascript.php?key=%E4%B8%BB%E9%A2%98%E5%88%97%E8%A1%A8_%E7%AB%99%E7%82%B9%E9%A6%96%E9%A1%B5"></script>
+	  </UL>
+  </DIV>
+</DIV>
+
+<DIV class=BR_10></DIV>
+<DIV class=redian>
+<DIV class=list>
+<UL>
+ </UL></DIV></DIV>
+</DIV>
+<DIV class=BR></DIV></DIV>
+<DIV class=BR_20></DIV>
+<{include file="footer.html"}>

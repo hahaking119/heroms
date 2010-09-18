@@ -1,0 +1,74 @@
+<{include file="header.htm"}>
+<link type="text/css" rel="stylesheet" href="style/jquery.rte.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.rte.js"></script>
+<script type="text/javascript" src="js/jquery.rte.tb.js"></script>
+<script type="text/javascript" src="js/jquery.ocupload-1.1.4.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var arr = $('.rte1').rte({
+		css: ['style/base.css'],
+		controls_rte: rte_toolbar,
+		controls_html: html_toolbar
+	});
+
+});
+</script>
+<div class="container">
+    <{if $errormsg}>
+    <div class="errormsg"> <{$errormsg}> </div>
+    <{/if}>
+    <form action="admin.php?m=singlepage&a=edit" method="post" enctype="multipart/form-data" name="form1" id="form1">
+	<input type="hidden" name="singleid" value="<{$singleid}>">
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+    <tr>
+        <td colspan="5" class="tb_head">添加文章 *为必填</td>
+    </tr>
+        <tr>
+        <td width="95">文章标题</td>
+          <td colspan="4">
+            <label></label>
+            <input name="title" type="text" id="title" class='required' 
+				title='文章标题不能为空' alt="{event: 'blur'}" size="41" value="<{$title}>" /></td>
+    </tr>
+        <tr>
+        <td width="95">是否显示</td>
+          <td width="420">
+		  <{if $status == 1}>
+		  <input name="status" type="radio" id="radio" value="1" checked="checked" />是<input type="radio" name="status" id="radio2" value="0" />否
+		  <{else}>
+		  <input name="status" type="radio" id="radio" value="1" />是<input type="radio" name="status" id="radio2" value="0" checked="checked" />否
+		  <{/if}>		   </td>
+          <td width="6">&nbsp;</td>
+          <td width="244">&nbsp;</td>
+          <td width="552">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="95"></td>
+          <td colspan="4"></td>
+        </tr>
+            <tr>
+        <td width="95">文章内容</td>
+          <td colspan="4">
+          <textarea id="content_1" name="content"  class="rte1" style="width:700px;height:300px;visibility:hidden;"><{$content}></textarea></td>
+            </tr>
+			<tr>
+        <td width="72">静态化名称</td>
+          <td colspan="4">
+            <label></label>
+            <input name="static_name" type="text" id="static_name" class='required' size="41" value="<{$static_name}>"/>
+            (可留空)</td>
+    </tr>
+			<tr>
+        <td width="72">选择模板</td>
+          <td colspan="4">
+            <label></label>
+            <{html_options name="tpl_name" id="tpl_name" values=$tpl_list output=$tpl_list selected=$tpl_name}></td>
+    </tr>
+                        <tr>
+        <td height="37" colspan="5" align="center"><input class="button" type="submit" name="addtraincontent" id="addtraincontent" value="修改网页" />
+           <input type="reset"  class="button"  name="button2" id="button2" value="重新填写" /></td>
+          </tr>
+    </table>
+    </form>
+</div>

@@ -1,0 +1,10 @@
+	<style type="text/css">
+	#debuginfo {width: 60%;margin-left: 2em;}
+	fieldset {margin-top: 2em; display: block;}
+	</style>
+	<div style="text-align: left;" id="debuginfo">
+		
+	</div>
+
+</body>
+</html>

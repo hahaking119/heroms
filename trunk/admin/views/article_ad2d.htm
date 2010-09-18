@@ -1,0 +1,189 @@
+<{include file="header.htm"}>
+<script type="text/javascript" charset="utf-8" language="javascript" src="libs/kindeditor/kindeditor.js"></script>
+<script src="js/jquery.crayonbox.js" type="text/javascript"></script>
+<script type="text/javascript">
+       KE.show({
+           id : 'content_1',
+		   cssPath : './libs/kindeditor/index.css'
+       });
+   </script>
+   <script src="js/ajaxupload.3.2.js" type="text/javascript"></script>
+<script type= "text/javascript">/*<![CDATA[*/
+$(document).ready(function(){
+
+	/* example 1 */
+	var button = $('#button1'), interval;
+	var i = 0;
+	new Ajax_upload(button,{
+		//action: 'upload-test.php', // I disabled uploads in this example for security reasons
+		action: 'upload.php', 
+		name: 'picfile',
+		onSubmit : function(file, ext){
+			// change button text, when user selects file			
+			button.text('Uploading');
+			// If you want to allow uploading only 1 file at time,
+			// you can disable upload button
+			this.disable();
+			if (ext && /^(jpg|png|jpeg|gif)$/.test(ext)){
+				/* Setting data */
+				this.setData({
+					'key': 'This string will be send with the file'
+				});
+			} else {
+				// extension is not allowed
+				alert("不是图片格式，不允许上传");
+				// cancel upload
+				this.enable();
+				return false;				
+			}
+			
+			// Uploding -> Uploading. -> Uploading...
+			interval = window.setInterval(function(){
+				var text = button.text();
+				if (text.length < 13){
+					button.text(text + '.');					
+				} else {
+					button.text('Uploading');				
+				}
+			}, 200);
+		},
+		onComplete: function(file, response){
+			button.text('Upload');
+						
+			window.clearInterval(interval);
+						
+			// enable upload button
+			this.enable();
+			eval('myjson=' + response + ';');
+			// add file to the list
+			//$('<li></li>').appendTo('#example1 .files').html("<div id='filecontent'><img src='icon/" + myjson.filetype + ".gif'> <img src=" + myjson.picaddress + "></div>");	
+			$('#picaddress').val(myjson.picaddress);		
+			$('#picinfo').html("<img src='images/icon/" + myjson.filetype + ".gif'>标题图片上传成功").css({color:"#ff0000"});	
+							
+		}
+	});
+	
+	new Ajax_upload('#button2',{
+		//action: 'upload-test.php', // I disabled uploads in this example for security reasons
+		action: 'upload.php', 
+		name: 'picfile',
+		onComplete: function(file, response){		
+			// enable upload button
+			this.enable();
+			i++;
+			eval('myjson=' + response + ';');
+			$("#fileext").val(myjson.picaddress);
+			$('<td></td>').appendTo('#files').text("<ol><img src='images/icon/" + myjson.filetype + ".gif'><a href='" + myjson.picaddress + "'>附件" + i + "</a></ol>");
+			$('<td></td>').appendTo('#filelist').html("<img src='images/icon/" + myjson.filetype + ".gif'><a href='" + myjson.picaddress + "'> 附件" + i + "</a><br>" );	
+		}
+	});
+$('#tcolor').crayonbox();	
+});/*]]>*/
+</script>
+	<style type="text/css"> 
+.crayon {color: #000;width:200px; 
+cursor: pointer; 
+border: 1px solid #333; 
+float: left; 
+font-family: Fixed, monospace; 
+margin: 1px; text-align: center; 
+width: 1em; } 
+	</style> 
+
+<div class="container">
+    <{if $errormsg}>
+    <div class="errormsg"> <{$errormsg}> </div>
+    <{/if}>
+    <form action="admin.php?m=article&a=add" method="post" enctype="multipart/form-data" name="form1" id="form1">
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+    <tr>
+        <td colspan="5" class="tb_head">添加文章 *为必填</td>
+    </tr>
+    <tr>
+        <td width="87">所属栏目</td>
+        <td colspan="4"><{$cat_select}> * 选择最小分类</td>
+    </tr>
+        <tr>
+        <td width="87">文章标题</td>
+          <td colspan="4">
+            <label>
+            <select name="typeid">
+              <option value="0">分类</option>
+              <option value="1">推荐</option>
+              <option value="2">热点</option>
+              <option value="3">注意</option>
+            </select>
+            </label>
+            <input name="title" type="text" id="title" class='required' 
+				title='文章标题不能为空' alt="{event: 'blur'}" size="41" maxlength="60"/>
+            标题颜色<input type="text" id="tcolor" size="26">
+</td>
+    </tr>
+        <tr>
+        <td width="87">文章作者</td>
+          <td colspan="4"><input name="author" type="text" id="author" size="50" />
+          多个作者空格分开</td>
+    </tr>
+        <tr>
+        <td width="87">是否显示</td>
+          <td width="65"><input name="status" type="radio" id="radio" value="1" checked="checked" />
+            是
+            <input type="radio" name="status" id="radio2" value="0" />
+          否 </td>
+          <td width="117">推荐 
+            <label>
+            <input name="is_commend" type="checkbox" id="is_commend" value="1" />
+          </label></td>
+          <td width="455">置顶 
+            <label><input type="checkbox" name="top_flag" id="top_flag" value="1"/>
+          </label> </td>
+          <td width="439">发布时间：
+   	      <input name="created" type="text" id="created" size="22"  value="<{$time}>"/></td>
+        </tr>
+        <tr>
+          <td width="87"></td>
+          <td colspan="4"></td>
+        </tr>
+        <tr>
+        <td width="87">跳转地址</td>
+        <td colspan="4"><label>
+          <input name="url" type="text" id="url" size="50" />
+          如果需要链接到其他的页面请填写此项
+        </label></td>
+    	</tr>
+        <tr>
+        <td width="87">内容标签tag</td>
+          <td colspan="4"><input name="keywords" type="text" id="keywords" size="50" />
+            多个用空格分开</td>
+    </tr>
+                <tr>
+        <td width="87">标题图片</td>
+          <td colspan="4"><input name="picaddress" type="input" id="picaddress" size="64" /> <div id="button1" class="upload">上传图片</div><div id="picinfo" style="width:150px;padding-left:10px;float:left;"></div></td>
+            </tr>
+        <tr>
+        <td width="87" height="39">文章摘要</td>
+          <td colspan="4"><textarea name="summary" id="summary" cols="80" rows="3"></textarea></td>
+    </tr>
+            <tr>
+        <td width="87">文章内容</td>
+          <td colspan="4">
+          <textarea id="content" name="content" class='required'  title="内容不能为空" style="width:700px;height:300px;visibility:hidden;"></textarea></td>
+            </tr>
+			<tr>
+        <td width="87">添加附件</td>
+          <td colspan="2"><input name="upfile" type="button" class="upload"  id="button2" value="上传附件"/>
+             </td>
+			<td><textarea name = "exts" cols="60" rows="5" id="files"></textarea></td>
+			<td><div id="filelist" style="float:left;width:300px;line-height:22px;"></div></td>
+			</tr>
+			<tr>
+        <td width="87">文章来源</td>
+          <td colspan="4"><input name="source" type="text" id="source" size="50" value="企业联盟"/></td>
+			</tr>
+                        <tr>
+        <td height="37" colspan="5" align="center"><input class="button" type="submit" name="addtraincontent" id="addtraincontent" value="发布文章" />
+           <input type="reset"  class="button"  name="button2" id="button2" value="重新填写" /></td>
+          </tr>
+    </table>
+    </form>
+</div>

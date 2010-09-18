@@ -1,0 +1,30 @@
+<{include file="header.html"}>
+<LINK href="<{$themdir}>style/news_09.css" type=text/css rel=stylesheet>
+<DIV class=BR_8></DIV>
+<DIV id="container">
+<DIV id="left">
+<DIV class="container">
+<DIV id="breadcrumb">您所在的位置：<a href="<{$hostname}>">首页</a> &raquo; 杂志下载</DIV>
+ <div class="list_down">
+ <ul>
+ <{foreach from=$downs item=ls}>
+ <li><{if $ls.thumb}><img src="<{$ls.thumb}>" /><{/if}><h3><a href="./down.php?q=down&id=<{$ls.downid}>"><{$ls.title}></a><span>发布时间:<{$ls.pubtime}></span></h3>
+<p><{$ls.summary}> [<a href="./down.php?q=down&id=<{$ls.downid}>">点击下载</a>]</p>
+</li>
+ <{/foreach}>
+ </ul>
+  <DIV class=BR_3></DIV>
+  <{$mutipage}>
+ <BR>
+ </div>
+<DIV class=BR_20></DIV>
+</DIV>
+<DIV class=BR_8></DIV>
+</DIV>
+<DIV id=right>
+<{include file="right.html"}>
+
+</DIV>
+<DIV class=BR></DIV></DIV>
+<DIV class=BR_20></DIV>
+<{include file="footer.html"}>

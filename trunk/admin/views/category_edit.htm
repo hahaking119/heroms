@@ -1,0 +1,41 @@
+<{include file="header.htm"}>
+<div class="container">
+  <form id="form2" name="form2" method="post" action="admin.php?m=category&a=edit">
+  <input type="hidden" name="catid" value="<{$catid}>">
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="2" class="tb_head">编辑栏目</td>
+      </tr>
+      <tr>
+        <td width="111">上级栏目</td>
+        <td width="377"><{$parentls}></td>
+      </tr>
+      <tr>
+        <td>栏目名称</td>
+        <td><input name="catname" type="text" id="catname" value="<{$catname}>"/></td>
+      </tr>
+      <tr>
+        <td>栏目关键字</td>
+        <td><input name="keywords" type="text" id="keywords" value="<{$keywords}>"/></td>
+      </tr>
+      <tr>
+        <td>栏目描述</td>
+        <td><label>
+          <textarea name="description" id="description" cols="60" rows="3"><{$description}></textarea>
+        </label></td>
+      </tr>
+       <tr>
+        <td>显示顺序</td>
+        <td><input name="sort" type="text" id="sort" value="<{$sort}>"/></td>
+      </tr>
+      <tr>
+        <td height="64">&nbsp;</td>
+        <td><label>
+          <input type="submit" name="submit" id="submit" value="更新栏目" />
+        </label></td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </form>
+</div>

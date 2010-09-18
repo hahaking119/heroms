@@ -1,0 +1,34 @@
+<DIV class="top10">
+  <DIV  style="DISPLAY: block;padding-left:10px;">
+	 <form id="loginform" method="get" name="login" action="search.php" target="_self" style="margin:0px">
+	<input type="text" id="q" name="q" size="30" maxlength="40" tabindex="1" value="输入文章标题" onclick="this.value = ''">
+	<input type="submit" name="submit" id="submit" value="搜索" />
+	</form>
+  </DIV>
+</DIV>
+
+<DIV class="info_list">
+<UL id="hot_photos_list">
+<{foreach from=$side_photos item=pls}>
+			<li>
+			<a href="photos.php?q=d&id=<{$pls.photoid}>" target="_blank"><img src="<{$pls.pics}>" width="100" height="120" alt="<{$pls.title_cn}>"/></a><span class="photo_title"><dl><a href="photos.php?q=d&id=<{$pls.photoid}>" target="_blank"><{$pls.title_cn}></a></dl></span>
+			</li>
+<{/foreach}>
+</UL>
+</DIV>
+
+<DIV class=bann id=MyMoveAd 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; OVERFLOW: hidden; WIDTH: 280px; PADDING-TOP: 0px; HEIGHT: 1px">
+</DIV>
+<DIV class="top10">
+	<div class="tt">热点推荐</div>
+  <DIV class="list" id=top10_1 style="DISPLAY: block">
+	  <UL>
+	  <{foreach from=$hot_data item=ls}>
+		<LI><A title="<{$ls.title}>" href="<{$ls.link_url}>" target="_blank" title="<{$ls.title}>"><{$ls.title}></A> </LI>
+	  <{/foreach}>
+	  </UL>
+  </DIV>
+</DIV>
+
+<DIV class=BR_10></DIV>

@@ -1,0 +1,96 @@
+<{include file="header.htm"}>
+<script language="javascript">
+$(document).ready(function(){
+	
+	$("#catname").blur(function(){
+		var cat_name = $("#catname").attr("value");
+		$.post("?m=ajax&a=pinyin",{"cstr":cat_name},function(data){
+			var catdir = $("#catdir").val();
+			if(!catdir){
+				$("#catdir").val(data);
+			}
+		
+		});
+	});
+	
+	$("#form2").submit(function(){
+		var cat_name = $("#catname").val();
+		var catdir = $("#catdir").val();
+		if(cat_name == ""){
+			alert("栏目部能为空");
+			return false;
+		}else if(catdir == "") {
+			alert("栏目目录不能为空");
+			return false;
+		}
+		return true;
+	});
+
+});
+</script>
+<div class="container">
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="7" class="tb_head">栏目列表</td>
+      </tr>
+      <tr>
+        <th width="40" height="24">编号</th>
+        <th width="50">频道</th>
+        <th width="132">栏目名称</th>
+		<th width="96">文章数</th>
+		<th width="192">创建时间</th>
+        <th>操作</th>
+      </tr>
+      <{foreach from=$cats item = ls}>
+            <tr>
+        <td height="23"><{$ls.catid}></td>
+        <td align="center"><{$ls.channelid}></td>
+        <td align="left"><{if $ls.parentid == 0 }><img src="images/spread.gif" /><{else}><img src="images/shrink.gif" /><{/if}><{$ls.depth_line}> <{$ls.catname}></td>
+		<td align="center"><font color="red"><{$ls.hasarts}></font></td>
+		<td align="center"><{$ls.created|date_format:"%y-%m-%d"}></td>
+        <td align="left"><a href="?m=category&a=editindex&id=<{$ls.catid}>">编辑</a> | <a href="?m=category&a=clear&id=<{$ls.catid}>">清空</a> | <a href="?m=category&a=del&id=<{$ls.catid}>">删除</a> <{if $ls.haschilds == 0}> | <a href="admin.php?m=article&a=addindex&id=<{$ls.catid}>">添加文章</a><{/if}></td>
+      </tr>
+      <{/foreach}>
+    </table>
+    <form id="form2" name="form2" method="post" action="admin.php?m=category&a=add">
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="2" class="tb_head">添加栏目</td>
+      </tr>
+      <tr>
+        <td width="111">上级栏目</td>
+        <td width="377"><{$parentls}></td>
+      </tr>
+      <tr>
+        <td>栏目名称</td>
+        <td><input name="catname" type="text" id="catname" value=""/><font color="red">*填写栏目名称</font></td>
+      </tr>
+      <tr>
+        <td>栏目关键字</td>
+        <td><input name="keywords" type="text" id="keywords" /></td>
+      </tr>
+      <tr>
+        <td>栏目描述</td>
+        <td><label>
+          <textarea name="description" id="description" cols="60" rows="3"></textarea>
+        </label></td>
+      </tr>
+       <tr>
+        <td>显示顺序</td>
+        <td><input name="sort" type="text" id="sort" /></td>
+      </tr>
+	  <tr>
+        <td>栏目目录名称</td>
+        <td><input name="catdir" type="text" id="catdir" /><font color="red">*必须用英文，用来静态化存放文件的目录</font></td>
+      </tr>
+      <tr>
+        <td height="64">&nbsp;</td>
+        <td><label>
+          <input type="submit" name="submit" id="submit" value="添加栏目" />
+        </label></td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </form>
+</div>

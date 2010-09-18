@@ -1,0 +1,134 @@
+<{include file="header.html"}>
+	<div class="wrap">
+		<div id="index_left">
+			<div id="index_left_top">	
+				<div id="focus_list">
+				<div class="index_dongtai"><a href="article.php?q=list&id=35"><img src="<{$themdir}>images/dongtai.gif"/></a></div>
+								<{foreach from=$newslist item=ls}>
+									<li><span><{$ls.created|date_format:"%Y-%m-%d"}></span><a href="article.php?q=d&id=<{$ls.articleid}>" target="_blank"><{$ls.title}></a></li>
+								<{/foreach}>
+				</div>
+				<div id="juhui">
+					<div class="gonggao">
+					<div style="width:36px;height:70px;float:left;"><a href="article.php?q=list&id=45"><img src="<{$themdir}>images/gonggao.gif"/></a></div>
+					<div class="gglist"><ul>
+					<marquee direction="up" width="160" height="70" scrollamount="1" scrolldelay="60" onMouseOver="this.stop();" onMouseOut="this.start();"> 
+					<{foreach from=$gglist item=ls}>
+					<li><a href="article.php?q=d&id=<{$ls.articleid}>" target="_blank"><{$ls.title}></a></li>
+					<{/foreach}>
+					</marquee>
+					</ul></div>
+					</div>
+					<div class="juhui_header"><a href="juhui.php"><img src="<{$themdir}>images/juhui_header.gif" target="_blank"/></a></div>
+					<div class="juhui_desc"><h3><{$juhui.title}></h3></div>
+					<p class="juhui_num"><img src="<{$themdir}>images/ren.gif"><span>已报名：<b><{$baoming}></b>人</span></p>
+					<p class="juhui_baoming"><a href="#"><img src="<{$themdir}>images/baoming.gif" id="baoming"></a> <a href="juhui.php?q=d&id=<{$juhui.juhuiid}>"><img src="<{$themdir}>images/kankan.gif"></a></p>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<!--<div id="top_focus">
+				<div id="focus_pic">
+				<object id="bcastr4" data="swf/upanddown.swf?xml=xml/upanddown.xml" type="application/x-shockwave-flash" width="406" height="200">
+    <param name="movie" value="swf/upanddown.swf?xml=xml/upanddown.xml" />
+</object>
+				</div>-->	
+			<div class="cats">
+			<div class="index_xiangce"><a href="photos.php"><img src="<{$themdir}>images/xiangce.gif"/></a></div>
+			<script src="./js/jquery.js" language="javascript"></script>
+			<script language="javascript">
+			$(function(){	
+				function scrollSeller(offset){
+					$("#roller").animate({'scrollTop':offset},1000,"swing",function(){
+						window.setTimeout(function(){scrollSeller(offset==130?0:130)},5000);
+					});
+				}
+				scrollSeller(130);
+			});
+			</script>
+			<div id="scroller">
+			<ul id="roller">
+			<{foreach from=$abulmlist item=ls}>
+			<li>
+				<div class="myPhoto"><a href="photos.php?q=d&id=<{$ls.photoid}>"><img src="<{$ls.pics}>" border="0" alt="<{$ls.title_cn}>" width="100" height="100" /></a></div>
+				<p><a href="photos.php?q=d&id=<{$ls.photoid}>" title="<{$ls.title_cn}>"><strong><{$ls.title_cn|default:"&nbsp;"}></strong></a></p>
+			</li>
+			<{/foreach}>
+			</ul>
+			</div>
+			
+			<div class="clear"></div>
+			</div>	
+			<div class="friendlink">
+			<ul>
+			<{foreach from=$linklist item=ls}>
+			<li><a href="<{$ls.siteurl}>" target="_blank"><{$ls.sitename}></a></li>
+			<{/foreach}>
+			</li>
+			</div>	
+		<div class="clear"></div>
+		</div>
+		
+		<div id="index_right">
+		<div class="txtleft pa-15">
+		<{if $login}>
+		<div class="login_in">
+		<p>欢迎您，<{$username}>,[<a href="login.php?q=logout">退出</a>]</p>
+		<p><a href="member.php?c=profile">修改资料</a> | <a href="member.php?c=abulm&do=addphoto">传照片</a> | <a href="member.php?c=changepwd">修改密码</a></p>
+		<p> <a href="juhui.php">查看聚会</a> | <a href="./bbs">进入论坛</a></p>
+		</div>
+		<{else}>
+		<form id="loginform" method="post" name="login" action="login.php?q=login&loginsubmit=true" target="_self" style="margin:0px">
+                                <input type="hidden" name="formhash" value="{FORMHASH}" />
+                                <input type="hidden" name="cookietime" value="2592000" />
+                                <input type="hidden" name="loginfield" value="username" />
+                                <span class="logintitle">　 Username</span><br />
+                                　
+                                <input type="text" id="username" name="username" class="username" size="30" maxlength="40" tabindex="1" value="输入用户名" onclick="this.value = ''" /><br />
+                                <span class="logintitle">　 Password</span><br />
+                                　
+										<input type="password" id="password" name="password" class="password" size="30" tabindex="2" onkeypress="if((event.keyCode ? event.keyCode : event.charCode) == 13) $('loginform').submit()" /><br />
+										　<button name="userlogin" type="submit" value="true" class="login">登录</button>
+				 　 <a href="register.php" target="_blank" class="cGreen">>>注册新用户</a>
+		</form>
+		<{/if}>
+		</div>
+		<div class="right_head"><img src="<{$themdir}>images/luntan.gif" width="312"/></div>
+		<div class="index_right_content">
+		<script type="text/javascript" src="http://www.xjtunj.com/bbs/api/javascript.php?key=%E4%B8%BB%E9%A2%98%E5%88%97%E8%A1%A8_%E7%AB%99%E7%82%B9%E9%A6%96%E9%A1%B5"></script>
+		</div>
+		<div class="right_head"><img src="<{$themdir}>images/contactus.gif" width="312"/></div>
+		<div class="index_right_contact">
+		<p>联络人：陈志英</p>
+		<p>电话：13372018582</p>
+		<p>E-mail:xjtunj@163.com </p>
+		<p>办公地点：南京江宁区科学园天元东路52号</p>
+		</div>
+		
+			<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<script type="text/javascript">
+$(function(){
+
+
+$("#baoming").click(function(){
+$.get("juhui.php",
+{q:"join",id:"<{$juhui.juhuiid}>"},
+function(data){
+	if(data == 1){
+		alert("报名成功");
+		window.document.href="index.php";
+	}else if(data == 2){
+		alert("对不起，你已经报过名了");
+	}else if(data == 3){
+		alert("请先登录");
+		document.location.href="login.php";
+	}
+});
+});
+});
+</script>
+<{include file="footer.html"}>

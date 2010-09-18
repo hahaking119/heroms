@@ -1,0 +1,17 @@
+<{include file="header.html"}>
+<div class="wrap">
+		<div id="sindex_bar"></div>
+		<div id="photo_detail">
+			<div id="detail_top">
+			<div class="photo_nav"><a href="index.php">主页</a> > <a href="photos.php">校友相册</a> > <a href="photos.php?q=user&id=<{$userid}>"><{$realname}>的相册</a> > <a href="photos.php?q=class&id=<{$classid}>"> <{$classname}> </a></div>
+				<div class="photo_title"><{$title_cn}></div>
+				<div class="detail_img"><img src="./<{$pics}>" onload="wr = this.width/880;hr=this.height/600;if(wr>1&&wr>=hr) this.width=880;if(hr>1&&hr>wr) this.height=880" /></div>
+				<div class="link_photo"><span><{$next_link}></span><{$pre_link}></div>
+					
+					<div class="photo_desc"><span>照片描述：</span><br />&nbsp;&nbsp;<{$description}></div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<div style="height:20px;clear:both;"></div>
+</div>	
+<{include file="footer.html"}>

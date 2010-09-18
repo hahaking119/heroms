@@ -1,0 +1,98 @@
+<{include file="header.htm"}>
+<script type="text/javascript" charset="utf-8" language="javascript" src="libs/kindeditor/kindeditor.js"></script>
+<script type="text/javascript">
+       KE.show({
+           id : 'content_1',
+		   cssPath : './libs/kindeditor/index.css'
+       });
+   </script>
+   <script src="js/ajaxupload.3.2.js" type="text/javascript"></script>
+<script type= "text/javascript">/*<![CDATA[*/
+$(document).ready(function(){
+		new Ajax_upload('#button2',{
+		//action: 'upload-test.php', // I disabled uploads in this example for security reasons
+		action: 'upload.php', 
+		name: 'picfile',
+		onComplete: function(file, response){		
+			// enable upload button
+			this.enable();
+			eval('myjson=' + response + ';');
+			$('#fileaddress').val(myjson.picaddress);
+			$('#picinfo').append("<img src='images/icon/" + myjson.filetype + ".gif'> " + myjson.picaddress );	
+		}
+	});
+	
+	new Ajax_upload('#button1',{
+		action: 'upload.php', 
+		name: 'picfile',
+		onComplete: function(file, response){		
+			// enable upload button
+			this.enable();
+			eval('myjson=' + response + ';');
+			$('#title_image').val(myjson.picaddress);
+			$('#picinfo').html("<img src='images/icon/" + myjson.filetype + ".gif'>标题图片上传成功").css({color:"#ff0000"});	
+		}
+	});
+
+	
+});/*]]>*/
+</script>
+<div class="container">
+    <{if $errormsg}>
+    <div class="errormsg"> <{$errormsg}> </div>
+    <{/if}>
+    <form action="admin.php?m=down&a=edit" method="post" enctype="multipart/form-data" name="form1" id="form1">
+	<input name="downid" type="hidden" id="downid" value="<{$downid}>" /> 
+    <table width="96%" cellspacing="0" cellpadding="0" class="tb">
+    <tr>
+        <td colspan="5" class="tb_head">添加下载 *为必填</td>
+    </tr>
+        <tr>
+        <td width="72">下载标题</td>
+          <td colspan="4">
+            <label></label>
+            <input name="title" type="text" id="title" class='required' 
+				title='文章标题不能为空' alt="{event: 'blur'}" size="41" value="<{$title}>"/>
+            标题颜色
+            <select name="tcolor" id="tcolor" >
+	<option value="" >颜色</option>
+</select></td>
+    </tr>
+        <tr>
+        <td width="72">是否显示</td>
+          <td width="144">
+		  <{if $status == 1}>
+		  <input name="status" type="radio" id="radio" value="1" checked="checked" />是<input type="radio" name="status" id="radio2" value="0" />否 
+		  <{else}>
+		  <input name="status" type="radio" id="radio" value="1" />是<input type="radio" name="status" id="radio2" value="0" checked="checked"/>否 
+		  <{/if}>		  </td>
+          <td width="166"><label></label></td>
+          <td width="177">&nbsp;</td>
+          <td width="400">发布时间：
+   	      <input name="creatat" type="text" id="created" size="22" value='<{$created|date_format:"%y-%m-%d %T"}>'/></td>
+        </tr>
+        <tr>
+          <td width="72"></td>
+          <td colspan="4"></td>
+        </tr>
+          <tr>
+        <td width="80">标题图片</td>
+          <td colspan="4">
+          <input name="title_image" type="input" id="title_image" size="64" value="<{$title_image}>"/> <div id="button1" class="upload">上传标题图片</div><div id="picinfo" style="width:150px;padding-left:10px;float:left;"></div></td>
+            </tr>      
+            <tr>
+              <td width="72">下载描述</td>
+        <td colspan="5">
+          <textarea id="content_1" name="content" style="width:700px;height:300px;visibility:hidden;"><{$content}></textarea></td>
+          </tr>
+             <tr>
+        <td width="72">上传文件</td>
+          <td colspan="4"><input name="fileaddress" type="text" id="fileaddress" class='required'  size="60" value="<{$file1}>" /><input id="button2" type="button" value="上传文件" class="upload"/> 
+            使用网络地址：
+              <input name="url1" type="text" id="url1" size="41" value="<{$url1}>"/></td>
+            </tr>
+        <td height="37" colspan="5" align="center"><input class="button" type="submit" name="addtraincontent" id="addtraincontent" value="更新下载" /></td>
+          </tr>
+    </table>
+    </form>
+</div>

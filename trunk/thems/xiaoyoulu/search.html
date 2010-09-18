@@ -1,0 +1,38 @@
+<{include file="header.html"}>
+<LINK href="<{$themdir}>style/news_09.css" type=text/css rel=stylesheet>
+<DIV class=BR_8></DIV>
+<DIV id="container">
+<div class="common_search">
+<form id="loginform" method="get" name="login" action="search.php" target="_self" style="margin:0px">
+<input type="text" id="q" name="q" size="30" maxlength="40" tabindex="1" value="<{$keyword}>" onclick="this.value = ''">
+<input type="submit" name="submit" id="submit" value="搜索" />
+</form>
+</div>
+<DIV id="left" width=901>
+<DIV class="container" >
+<DIV id="breadcrumb">您所在的位置：<a href="<{$hostname}>">首页</a>&raquo;搜索结果</DIV>
+ <div class="list_art">
+ <ul>
+ <{if $nullmsg}>
+ <{$nullmsg}>
+ <{else}>
+ <{foreach from=$search_list item=ls}>
+ <li>
+ 	<h3><a href="<{$ls.article_url}>"><{$ls.title}></a></h3>
+ 	<p><{$ls.summary}>	&nbsp;&nbsp;<a href="<{$ls.article_url}>">[详情]</a></p>
+ </li>
+ <{/foreach}>
+ <{/if}>
+ 
+ </ul>
+	
+  <DIV class=BR_3></DIV>
+ <BR>
+ </div>
+<DIV class=BR_20></DIV>
+</DIV>
+<DIV class=BR_8></DIV>
+</DIV>
+<DIV class=BR></DIV></DIV>
+<DIV class=BR_20></DIV>
+<{include file="footer.html"}>

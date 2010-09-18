@@ -1,0 +1,32 @@
+<{include file="header.htm"}>
+<div class="container">
+<div class="operatebox">
+  <p><img src="./images/sendpm.gif" width="16" height="16" /> <a href="admin.php?m=singlepage&a=addindex">添加网页</a></p>
+</div>
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="6" class="tb_head">栏目列表</td>
+      </tr>
+      <tr>
+        <th width="28" >选择</th>
+		<th width="38" height="24">编号</th>
+        <th>网页标题</th>
+		<th width="80">发布时间</th>
+        <th width="120">操作</th>
+      </tr>
+      <{if $nullmsg}>
+      <tr><td colspan="6"><{$nullmsg}></td></tr>
+      <{else}>
+      <{foreach from=$singles item = ls}>
+      <tr>
+	    <td><input type="checkbox" name="artarr[]" value="<{$ls.downid}>" /></td>
+        <td height="23" align="center"><{$ls.singleid}></td>
+        <td align="left"> <font color="<{$ls.tcolor}>"><a href="singlepage.php?q=d&id=<{$ls.singleid}>" target="_blank"><{$ls.title}></a></font></td>
+		<td><{$ls.created|date_format:"%y-%m-%d"}></td>
+        <td align="right"><a href="<{$ls.static_name}>.html" target="_blank">查看</a> | <a href="?m=singlepage&a=editindex&id=<{$ls.singleid}>">编辑</a> | <a href="?m=singlepage&a=del&id=<{$ls.singleid}>"  onclick="if(confirm('你确定要删除该网页吗，删除后无法恢复') == true){return true;} else {return false;}">删除</a></td>
+      </tr>
+      <{/foreach}>
+      <{/if}>
+  </table>
+  <{$mutipage}>
+</div>

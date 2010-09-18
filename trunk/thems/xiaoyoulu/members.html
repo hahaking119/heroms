@@ -1,0 +1,369 @@
+<{include file="header.html"}>
+<script src="<{$themdir}>js/jquery.js" language="javascript"></script>
+<div class="wrap members">
+<{if $action == 'd'}>
+<div class="member_tip"><{$username}> 会员详情</div>
+<div style="padding-left:10px;">
+<div class="title_tip">个人资料：</div>
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">姓名：</td>
+    <td align="left"><{$realname}></td>
+  </tr>
+  <tr>
+    <td align="right">性别：</td>
+    <td align="left">
+	<{if $gender == 1}>帅哥<{elseif $merrage == 2}>美女<{else}>保密<{/if}>
+	  </td>
+  </tr>
+  
+  <tr>
+    <td align="right">婚姻状况:</td>
+    <td align="left">
+<{if $merrage == 1}>已婚<{elseif $merrage == 2}>未婚<{else}>保密<{/if}>
+ </td>
+  </tr>
+  <tr>
+    <td align="right">出生年月日:</td>
+    <td align="left">
+	<{$birthday|date_format:"y-m-d"}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">年龄:</td>
+    <td align="left"><{$age}></td>
+  </tr>
+   <{if $homephone_status==1}>
+  <tr>
+    <td align="right">家庭电话:</td>
+    <td align="left"><{$homephone}></td>
+  </tr>
+  <{/if}>
+  <{if $officephone_status==1}>
+  <tr>
+    <td align="right">办公电话:</td>
+    <td align="left"><{$officephone}></td>
+  </tr>
+  <{/if}>
+  <{if $mobile_status==1}>
+  <tr>
+    <td align="right">手机:</td>
+    <td align="left"><{$mobile}></td>
+  </tr>
+  <{/if}>
+  <tr>
+    <td align="right">Email:</td>
+    <td align="left"><{$email}></td>
+  </tr>
+  <tr>
+    <td align="right">QQ:</td>
+    <td align="left"><{$qq}></td>
+  </tr>
+  <tr>
+    <td align="right">MSN:</td>
+    <td align="left"><{$msn}></td>
+  </tr>
+</table>
+<{if $show_social == 1}>
+<div class="title_tip">社会信息：</div>
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">工作单位：</td>
+    <td align="left"><{$job_company}></td>
+  </tr>
+  <tr>
+    <td align="right">通讯地址：</td>
+    <td align="left">
+	<{$job_address}></td>
+  </tr>
+  
+  <tr>
+    <td align="right">工作部门:</td>
+    <td align="left">
+		 <{$job_bumen}></td>
+  </tr>
+  <tr>
+    <td align="right">工作职务:</td>
+    <td align="left"><{$job_zhiwu}></td>
+  </tr>
+  <tr>
+    <td align="right">工作内容/职权:</td>
+    <td align="left"><{$job_zhiquan}></td>
+  </tr>
+  <tr>
+    <td align="right">祖籍:</td>
+    <td align="left"><{$job_zhuji}></td>
+  </tr>
+  <tr>
+    <td align="right">家庭住址:</td>
+    <td align="left"><{$job_homeaddress}></td>
+  </tr>
+</table>
+<{/if}>
+<div class="title_tip">专业信息：</div>
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">最高学历：</td>
+    <td align="left"><{$xueli}></td>
+  </tr>
+  <tr>
+    <td align="right">本科入学年份：</td>
+    <td align="left">
+	<{$benke_bengin}>年</td>
+  </tr>
+  
+  <tr>
+    <td align="right">本科毕业年份:</td>
+    <td align="left">
+		 <{$benke_end}>年</td>
+  </tr>
+  <tr>
+    <td align="right">本科学院:</td>
+    <td align="left"><{$benke_xuyuan}></td>
+  </tr>
+   <tr>
+    <td align="right">本科专业:</td>
+    <td align="left"><{$benke_zhuanye}></td>
+  </tr>
+  <tr>
+    <td align="right">研究生入学年份:</td>
+    <td align="left"><{$yanjiu_bengin}>年</td>
+  </tr>
+  <tr>
+    <td align="right">研究生毕业年份:</td>
+    <td align="left"><{$yanjiu_end}>年</td>
+  </tr>
+  <tr>
+    <td align="right">研究生学院:</td>
+    <td align="left"><{$yanjiu_xuyuan}></td>
+  </tr>
+   <tr>
+    <td align="right">研究生专业:</td>
+    <td align="left"><{$yanjiu_zhuanye}></td>
+  </tr>
+  <tr>
+    <td align="right">研究生导师:</td>
+    <td align="left"><{$yanjiu_daoshi}></td>
+  </tr>
+  <tr>
+    <td align="right">博士生入学年份:</td>
+    <td align="left"><{html_select_date prefix="boshi_begin" start_year="-55" end_year="+1" field_order="Y" time=$boshi_begin}>年</td>
+  </tr>
+  <tr>
+    <td align="right">博士毕业年份:</td>
+    <td align="left"><{html_select_date prefix="boshi_end"  start_year="-55" end_year="+1" field_order="Y" time=$boshi_end}>年</td>
+  </tr>
+  <tr>
+    <td align="right">博士生学院:</td>
+    <td align="left"><{$boshi_xuyuan}></td>
+  </tr>
+  <tr>
+    <td align="right">博士生专业:</td>
+    <td align="left"><{$boshi_zhuanye}></td>
+  </tr><tr>
+    <td align="right">博士生导师:</td>
+    <td align="left"><{$boshi_daoshi}></td>
+  </tr> 
+</table>
+<div class="title_tip">创业信息：</div>
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="230" height="19" align="right">希望创业的领域:</td>
+    <td align="left"><{$chuangye_lingyu}></td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的经验：</td>
+    <td align="left">
+	 <{if $chuangye_jingyan == 1}> 是 <{else}>否<{/if}>
+	 </td>
+  </tr>
+  
+  <tr>
+    <td align="right">是否有创业行业的市场经验:</td>
+    <td align="left">
+	<{if $chuangye_shichang == 1}>是 <{else}>否<{/if}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的销售经验:</td>
+    <td align="left">
+	<{if $chuangye_xiaoshou == 1}> 是<{else}>否<{/if}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的技术研发经验:</td>
+    <td align="left">
+	<{if $chuangye_jishu == 1}>是
+	<{else}>否<{/if}>
+	</td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的客户:</td>
+    <td align="left">
+	<{if $chuangye_kehu == 1}>是
+	<{else}>否
+	<{/if}>
+      </td>
+  </tr>
+  <tr>
+    <td align="right">是否有创业行业的经营团队:</td>
+    <td align="left">
+	<{if $chuangye_tuandui == 1}>是
+	<{else}>否
+	<{/if}></td>
+  </tr>
+  <tr>
+    <td align="right">觉得自己在未来创业团队中角色最适合:</td>
+	
+    <td align="left">
+	<{html_radios options=$juese_arr name="chuangye_juese"  checked=$chuangye_juese}>
+    </td>
+  </tr>
+</table>
+<{if $show_social == 1}>
+<div class="title_tip">社会信息：</div>
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">工作单位：</td>
+    <td align="left"><{$job_company}></td>
+  </tr>
+  <tr>
+    <td align="right">通讯地址：</td>
+    <td align="left">
+	 <{$job_address}></td>
+  </tr>
+  
+  <tr>
+    <td align="right">工作部门:</td>
+    <td align="left">
+		<{$job_bumen}></td>
+  </tr>
+  <tr>
+    <td align="right">工作职务:</td>
+    <td align="left"><{$job_zhiwu}></td>
+  </tr>
+  <tr>
+    <td align="right">工作内容/职权:</td>
+    <td align="left"><{$job_zhiquan}></td>
+  </tr>
+  <tr>
+    <td align="right">祖籍:</td>
+    <td align="left"><{$job_zhuji}></td>
+  </tr>
+  <tr>
+    <td align="right">家庭住址:</td>
+    <td align="left"><{$job_homeaddress}></td>
+  </tr> 
+</table>
+<{/if}>
+<br />
+<div class="title_tip">婚姻信息：</div>
+	<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">身高：</td>
+    <td align="left"><{$shengao}>cm</td>
+  </tr>
+  <tr>
+    <td align="right">体重：</td>
+    <td align="left">
+	  <{$tizhong}>kg</td>
+  </tr>
+  
+  <tr>
+    <td align="right">相貌自评:</td>
+    <td align="left">
+		<{html_radios name="xiangmao" options=$xiangmao_arr checked=$xiangmao}></td>
+  </tr>
+  </table>
+  <div class="title_tip">对对方的要求：</div>
+ <table width="98%" border="1" class="bt_style">
+  <tr>
+    <td align="right" width="124">身高:</td>
+    <td align="left"><{$o_shengao|default:0}>cm</td>
+  </tr>
+  <tr>
+    <td align="right">体重:</td>
+    <td align="left"><{$o_tizhong}>kg</td>
+  </tr>
+  <tr>
+    <td align="right">相貌自评:</td>
+    <td align="left"><{html_checkboxes name="o_xiangmao" options=$xiangmao_arr selected=$o_xiangmao}>
+      </td>
+  </tr>
+  <tr>
+    <td align="right">学历:</td>
+    <td align="left"><{html_radios name="o_xueli" options=$xueli_arr checked=$o_xueli}></td>
+  </tr>
+</table>
+<div class="title_tip">分会信息：</div>
+<table width="98%" border="1" class="bt_style">
+  <tr>
+    <td width="124" height="19" align="right">参加分会的名称：</td>
+    <td align="left"><{$fenhui}></td>
+  </tr>
+  <tr>
+    <td align="right">分会的职务：</td>
+    <td align="left">
+	<{html_radios name="fenhui_zhiwu" options=$zhiwu_arr checked=$fenhui_zhiwu}></td>
+  </tr>
+</table>
+</div>
+<{elseif $action == 'memberlist' || $action == 'search'}>
+<div class="members_list">
+<div class="msearch">
+<div class="member_tip">搜索会员</div>
+<form action="members.php?q=search" method="post">
+<table width="100%">
+	<tr class="form_tr" >
+		<td width="13%" height="24" valign="top" class="form_td_left">注册名：</td>
+		<td width="36%" valign="top" class="form_td_right">
+		<input type="text" maxlength="20" size="30" name="username"></td>
+	    <td width="14%" valign="top" class="form_td_right"><span class="form_td_left">真实姓名：</span></td>
+	    <td width="37%" valign="top" class="form_td_right"><input type="text" maxlength="20" size="30" name="realname" /></td>
+	</tr>
+	<tr class="form_tr" >
+		<td class="form_td_left" valign="top">在校班级：</td>
+		<td valign="top" class="form_td_right"><input type="text" maxlength="20" size="30" name="banji" /></td>
+	    <td valign="top" class="form_td_right"><span class="form_td_left">入学年份：</span></td>
+	    <td valign="top" class="form_td_right"><input type="text" maxlength="20" size="30" name="nianfen" /></td>
+	</tr>
+	<tr class="form_tr" >
+		<td class="form_td_left" width="13%" valign="top">学历：</td>
+		<td width="36%" valign="top" class="form_td_right"><input type="text" maxlength="20" size="30" name="xueli" /></td>
+	    <td width="14%" valign="top" class="form_td_right"><span class="form_td_left">所在学院：</span></td>
+	    <td width="37%" valign="top" class="form_td_right"><input type="text" maxlength="20" size="30" name="xueyuan" /></td>
+	</tr>
+	<tr class="form_tr" >
+		<td colspan="4" align="center" valign="top">  <input class="submit" type="submit" value="搜 索" /></td>
+		</tr>
+	</table>
+	</form>
+</div>
+<div class="member_tip"><{if $action == 'search'}>搜索会员信息<{else}>会员信息列表<{/if}></div>
+<table width="85%" border="0" align="center" cellpadding="2" cellspacing="1" class="list_table">
+	<tr  class="list_title_tr"> 
+		<th  class="list_title_td">注册名</th>
+		<th width="11%" class="list_title_td">姓名</th>
+		<th class="list_title_td">本科学院</th>
+		<th class="list_title_td">工作单位</th>
+		<th class="list_title_td">最高学历</th>
+		<th class="list_title_td">最近登陆</th>
+	</tr>
+<{foreach from = $member_list item=mem}>
+<tr  class="list_title_tr"> 
+		<td  class="list_title_td"><a href="members.php?q=d&id=<{$mem.userid}>"><{$mem.username}></a></td>
+		<td width="11%" class="list_title_td"><a href="members.php?q=d&id=<{$mem.userid}>"><{$mem.realname}></a></td>
+		<td class="list_title_td"><{$mem.benke_xuyuan}></td>
+		<td class="list_title_td"><{$mem.job_company}></td>
+		<td class="list_title_td"><{$mem.xueli}></td>
+		<td class="list_title_td"><{$mem.lastlogin}></td>
+	</tr>
+<{/foreach}>
+</table>
+</div>
+<{$mutipage}>
+<{/if}>
+
+<DIV class=BR_20></DIV>
+</div>
+<{include file="footer.html"}>

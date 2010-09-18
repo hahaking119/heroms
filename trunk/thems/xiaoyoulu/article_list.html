@@ -1,0 +1,32 @@
+<{include file="header.html"}>
+<LINK href="<{$themdir}>style/news_09.css" type=text/css rel=stylesheet>
+<DIV class=BR_8></DIV>
+<DIV id="container">
+<DIV id="left">
+<DIV class="container">
+<DIV id="breadcrumb">您所在的位置：<a href="<{$hostname}>">首页</a>&raquo;<{$address}></DIV>
+ <div class="list_art">
+ <ul>
+ <{foreach from=$artilcle_list item=ls}>
+ <li>
+ 	<h3><a href="<{$ls.link_url}>"><{$ls.title}></a></h3>
+ 	<p><{$ls.summary}>	&nbsp;&nbsp;<a href="<{$ls.link_url}>">[详情]</a></p>
+ </li>
+ <{/foreach}>
+ 
+ </ul>
+  <DIV class=BR_3></DIV>
+ <{$mutipage}>
+ <BR>
+ </div>
+<DIV class=BR_20></DIV>
+</DIV>
+<DIV class=BR_8></DIV>
+</DIV>
+<DIV id=right>
+<{include file="right.html"}>
+
+</DIV>
+<DIV class=BR></DIV></DIV>
+<DIV class=BR_20></DIV>
+<{include file="footer.html"}>

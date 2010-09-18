@@ -1,0 +1,77 @@
+<{include file="header.htm"}>
+<script>
+$().ready(function(){
+$("#title").focus(function(){
+$(this).val("");
+});
+});
+</script>
+<div class="container">
+<div class="operatebox">
+<a href="admin.php?m=juhui&a=addindex">添加聚会</a>
+</div>
+      <{if $no_checkjuhui}>
+	  <div style="color:#006600;clear:both;padding:5px;">没有需要审核的聚会信息</div>
+      <{else}>
+<table width="96%" class="tb" style="border:2px solid #FF0000;">
+      <tr>
+        <td colspan="9" class="tb_head">等待审核聚会列表</td>
+      </tr>
+      <tr>
+        <th width="46" >&nbsp;</th>
+		<th width="99" height="24">编号</th>
+        <th >聚会标题</th>
+		<th width="80">聚会时间</th>
+		<th width="80">发布时间</th>
+		<th width="60">浏览</th>
+		<th width="50">状态</th>
+        <th width="152">操作</th>
+      </tr>
+      <{foreach from=$checkjuhuilist item = ls}>
+      <tr>
+	    <td>&nbsp;</td>
+	    <td height="23" align="center"><{$ls.juhuiid}></td>
+        <td align="left"> <a href="juhui.php?q=d&id=<{$ls.juhuiid}>" target="_blank"><{$ls.title}></a></td>
+		<td align="center"><{$ls.time|date_format:"%y-%m-%d"}></td>
+		<td><{$ls.created|date_format:"%y-%m-%d"}></td>
+		<td align="center"><{$ls.clicks}></td>
+		<td align="center"><{if $ls.switch == 1}>通过 <{else}>审核中<{/if}></td>
+        <td align="right"> <a href="?m=juhui&a=editindex&id=<{$ls.juhuiid}>">编辑</a> | <a href="?m=juhui&a=del&id=<{$ls.juhuiid}>" onclick="if(confirm('你确定要删除该聚会吗，删除后无法恢复') == true){return true;} else {return false;}">删除</a> | <a href="?m=juhui&a=check&id=<{$ls.juhuiid}>" style="color:#FF0000;" >通过审核</a></td>
+      </tr>
+      <{/foreach}>
+  </table>  
+ <{/if}>
+  <hr />
+    <table width="96%" class="tb">
+      <tr>
+        <td colspan="9" class="tb_head">所有聚会</td>
+      </tr>
+      <tr>
+        <th width="28" >选择</th>
+		<th width="38" height="24">编号</th>
+        <th>聚会标题</th>
+		<th width="80">聚会时间</th>
+		<th width="80">发布时间</th>
+		<th width="50">浏览</th>
+		<th width="50">状态</th>
+        <th width="152">操作</th>
+      </tr>
+      <{if $no_juhui}>
+      <tr><td colspan="9">还没有发布聚会信息</td></tr>
+      <{else}>
+      <{foreach from=$juhuilist item = ls}>
+      <tr>
+	    <td><input type="checkbox" name="artarr[]" value="<{$ls.juhuiid}>" /></td>
+        <td height="23" align="center"><{$ls.juhuiid}></td>
+        <td align="left"><a href="juhui.php?q=d&id=<{$ls.juhuiid}>" target="_blank"><{$ls.title}></a></td>
+		<td align="center"><{$ls.time|date_format:"%y-%m-%d"}></td>
+		<td><{$ls.created|date_format:"%y-%m-%d"}></td>
+		<td align="center"><{$ls.clicks}></td>
+		<td align="center"><{if $ls.status == 1}> 通过 <{else}> 审核中<{/if}></td>
+        <td align="right"> <a href="?m=juhui&a=editindex&id=<{$ls.juhuiid}>">编辑</a> | <a href="?m=juhui&a=del&id=<{$ls.juhuiid}>" onclick="if(confirm('你确定要删除该聚会吗，删除后无法恢复') == true){return true;} else {return false;}">删除</a></td>
+      </tr>
+      <{/foreach}>
+      <{/if}>
+  </table>
+  <{$mutipage}>
+</div>

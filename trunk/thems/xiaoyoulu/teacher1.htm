@@ -1,0 +1,34 @@
+<{include file="header.html"}>
+<div id="content">
+<div id="con_left">
+	<div class="teachers">
+		  <dl>
+			  <dt><strong>教师信息</strong></dt>
+			  <{foreach from=$teacher_list item=ls}>
+			  <dd class="teacher_list">
+				  <div class="teacher_photo"><img src="<{$ls.photo}>" width="86" height="100"/></div>
+				  <div class="teacher_summery">
+					  <h3><a href="teacher.php?q=d&id=<{$ls.tid}>"><{$ls.teacher_name}> (<{$ls.profession}>)</a></h3><p class="date">最终学历：<{$ls.degree}> | 研究方向：<{$ls.searching}> | 所在院系：<{$ls.college}></p>
+					  <p class="text"><{$ls.search_info}>......<span class="more">[<a href="teacher.php?q=d&id=<{$ls.tid}>#a">教学情况</a>]</span><span class="more">--[<a href="teacher.php?q=d&id=<{$ls.tid}>#b">学术研究</a>]</span></p>
+				  </div>
+				  <div class="clear"></div>
+			  </dd>
+			  <{/foreach}>
+		  </dl>
+	</div>
+	  </div>
+<div id="con_right">
+<div class="prolocutor">
+        <h2>课程负责人</h2>
+        <{foreach from=$head_teacher item=ls}>
+        <div class="photo_text"> <span class="photo"> <a href="teacher.php?q=d&id=<{$ls.tid}>"><img src="<{$ls.photo}>" width="90" height="118" alt="<{$ls.teacher_name}>" /></a></span> <strong class="name">
+          <a href="teacher.php?q=d&id=<{$ls.tid}>"><{$ls.teacher_name}></a><br /><em>职称:<{$ls.profession}></em><br /><em>学位:<{$ls.degree}></em><br /><em>职务:<{$ls.duty}></em></strong>
+          <p><{$ls.search}>[<a href="teacher.php?q=d&id=<{$ls.tid}>">了解详情</a>]</p>
+          <div class="clear">&nbsp;</div>
+        </div>
+		<{/foreach}>
+      </div>
+</div>
+<div class="clear"></div>
+</div>
+<{include file="footer.html"}>
